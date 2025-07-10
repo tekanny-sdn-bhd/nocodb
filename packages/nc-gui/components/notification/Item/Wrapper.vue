@@ -19,7 +19,7 @@ const { toggleRead, deleteNotification } = notificationStore
   <div class="flex pl-6 pr-4 w-full overflow-x-hidden group py-4 hover:bg-gray-50 gap-3 relative cursor-pointer">
     <div class="w-9.625">
       <slot name="avatar">
-        <img src="~assets/img/brand/nocodb-logo.svg" alt="NocoDB" class="w-8" />
+        <img src="~assets/img/brand/nocodb-logo.svg" alt="NexTable" class="w-8" />
       </slot>
     </div>
 
@@ -35,26 +35,16 @@ const { toggleRead, deleteNotification } = notificationStore
           <span>Mark as read</span>
         </template>
 
-        <NcButton
-          :class="{
-            '!opacity-100': isMobileMode,
-          }"
-          type="secondary"
-          class="!border-0 transition-all duration-100 opacity-0 !group-hover:opacity-100"
-          size="xsmall"
-          @click.stop="() => toggleRead(item)"
-        >
+        <NcButton :class="{
+          '!opacity-100': isMobileMode,
+        }" type="secondary" class="!border-0 transition-all duration-100 opacity-0 !group-hover:opacity-100"
+          size="xsmall" @click.stop="() => toggleRead(item)">
           <GeneralIcon icon="check" class="text-gray-700" />
         </NcButton>
       </NcTooltip>
-      <NcDropdown
-        v-else
-        :class="{
-          '!opacity-100': isMobileMode,
-        }"
-        class="transition-all duration-100 opacity-0 !group-hover:opacity-100"
-        placement="bottomRight"
-      >
+      <NcDropdown v-else :class="{
+        '!opacity-100': isMobileMode,
+      }" class="transition-all duration-100 opacity-0 !group-hover:opacity-100" placement="bottomRight">
         <NcButton size="xsmall" type="secondary" @click.stop>
           <GeneralIcon icon="threeDotVertical" />
         </NcButton>
@@ -63,7 +53,8 @@ const { toggleRead, deleteNotification } = notificationStore
           <NcMenu variant="small">
             <NcMenuItem @click.stop="() => toggleRead(item)"> Mark as unread </NcMenuItem>
             <NcDivider />
-            <NcMenuItem class="!text-red-500 !hover:bg-red-50" @click.stop="deleteNotification(item)"> Delete </NcMenuItem>
+            <NcMenuItem class="!text-red-500 !hover:bg-red-50" @click.stop="deleteNotification(item)"> Delete
+            </NcMenuItem>
           </NcMenu>
         </template>
       </NcDropdown>

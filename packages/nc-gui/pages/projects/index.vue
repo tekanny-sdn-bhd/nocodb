@@ -10,22 +10,9 @@ const { t } = useI18n()
 
 const navDrawerOptions = [
   {
-    title: 'My NocoDB',
+    title: 'My NexTable',
     icon: MdiFolderOutline,
-  },
-  /* todo: implement the api and bring back the options below
-   {
-    title: "Shared With Me",
-    icon: MdiAccountGroup
-  },
-  {
-    title: "Recent",
-    icon: MdiClockOutline
-  },
-  {
-    title: "Starred",
-    icon: MdiStar
-  } */
+  }    /* todo: implement the api and bring back the options belo           title: "Shared With Me"      icon: MdiAccountGrou    }          title: "Recent"      icon: MdiClockOutlin    }          title: "Starred"      icon: MdiSta    } */
 ]
 
 const route = useRoute()
@@ -65,25 +52,20 @@ const deleteProject = (base: BaseType) => {
               <template #activator="{ props }">
                 <div
                   class="color-transition hover:(bg-gray-100) mr-auto select-none flex items-center gap-2 leading-8 cursor-pointer rounded-full border-1 border-gray-300 px-5 py-2 shadow prose-lg font-semibold"
-                  @click="props.onClick"
-                >
+                  @click="props.onClick">
                   <component :is="iconMap.plus" class="text-primary text-2xl" />
                   {{ $t('title.newProj') }}
                 </div>
               </template>
 
               <v-list class="!py-0 flex flex-col bg-white rounded-lg shadow-md border-1 border-gray-300 mt-2 ml-2">
-                <div
-                  class="grid grid-cols-12 cursor-pointer hover:bg-gray-200 flex items-center p-2"
-                  @click="navigateTo('/base/create')"
-                >
+                <div class="grid grid-cols-12 cursor-pointer hover:bg-gray-200 flex items-center p-2"
+                  @click="navigateTo('/base/create')">
                   <component :is="iconMap.plus" class="col-span-2 mr-1 mt-[1px] text-primary text-lg" />
                   <div class="col-span-10 text-sm xl:text-md">{{ $t('activity.createProject') }}</div>
                 </div>
-                <div
-                  class="grid grid-cols-12 cursor-pointer hover:bg-gray-200 flex items-center p-2"
-                  @click="navigateTo('/base/create-external')"
-                >
+                <div class="grid grid-cols-12 cursor-pointer hover:bg-gray-200 flex items-center p-2"
+                  @click="navigateTo('/base/create-external')">
                   <component :is="iconMap.database" class="col-span-2 mr-1 mt-[1px] text-green-500 text-lg" />
                   <div class="col-span-10 text-sm xl:text-md" v-html="$t('activity.createProjectExtended.extDB')" />
                 </div>
@@ -92,12 +74,8 @@ const deleteProject = (base: BaseType) => {
           </div>
 
           <a-menu class="pr-4 flex-1 border-0">
-            <a-menu-item
-              v-for="(option, index) in navDrawerOptions"
-              :key="index"
-              class="!rounded-r-lg"
-              @click="activePage = option.title"
-            >
+            <a-menu-item v-for="(option, index) in navDrawerOptions" :key="index" class="!rounded-r-lg"
+              @click="activePage = option.title">
               <div class="flex items-center gap-4">
                 <component :is="option.icon" />
 
@@ -121,16 +99,10 @@ const deleteProject = (base: BaseType) => {
           </div>
 
           <div class="self-end flex text-4xl mb-1">
-            <MaterialSymbolsGridView
-              :class="route.name === 'index-index' ? '!text-primary' : ''"
-              class="cursor-pointer p-2 hover:bg-gray-300/50 rounded-full"
-              @click="navigateTo('/')"
-            />
-            <MaterialSymbolsFormatListBulletedRounded
-              :class="route.name === 'index-index-list' ? '!text-primary' : ''"
-              class="cursor-pointer p-2 hover:bg-gray-300/50 rounded-full"
-              @click="navigateTo('/list')"
-            />
+            <MaterialSymbolsGridView :class="route.name === 'index-index' ? '!text-primary' : ''"
+              class="cursor-pointer p-2 hover:bg-gray-300/50 rounded-full" @click="navigateTo('/')" />
+            <MaterialSymbolsFormatListBulletedRounded :class="route.name === 'index-index-list' ? '!text-primary' : ''"
+              class="cursor-pointer p-2 hover:bg-gray-300/50 rounded-full" @click="navigateTo('/list')" />
           </div>
         </div>
 

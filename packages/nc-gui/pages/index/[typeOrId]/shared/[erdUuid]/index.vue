@@ -36,13 +36,12 @@ onMounted(async () => {
 <template>
   <div
     class="absolute z-60 transition-all duration-200 m-6 cursor-pointer transform hover:scale-105 flex text-xl items-center"
-    @click="navigateTo('/')"
-  >
+    @click="navigateTo('/')">
     <a-tooltip placement="bottom">
       <template #title>
         {{ appInfo.version }}
       </template>
-      <img width="50" alt="NocoDB" src="~/assets/img/icons/256x256.png" />
+      <img width="50" alt="NexTable" src="~/assets/img/icons/256x256.png" />
     </a-tooltip>
     <div class="ml-2 font-bold text-gray-500 uppercase">{{ base.title }}</div>
   </div>

@@ -521,7 +521,7 @@ const [useProvideSharedFormStore, useSharedFormStore] = useInjectionState((share
 
         // preFilledformState will be used in clear form to fill the prefilled data
         preFilledformState.value = JSON.parse(JSON.stringify(formState.value || {}))
-      } catch {}
+      } catch { }
     }
   }
 
@@ -556,8 +556,8 @@ const [useProvideSharedFormStore, useSharedFormStore] = useInjectionState((share
                 (limitOptions[op.id]
                   ? limitOptions[op.id]?.show
                   : parseProp(c.meta).isLimitOption
-                  ? !(parseProp(c.meta).limitOptions || []).length
-                  : true)
+                    ? !(parseProp(c.meta).limitOptions || []).length
+                    : true)
               ) {
                 return true
               }
@@ -578,8 +578,8 @@ const [useProvideSharedFormStore, useSharedFormStore] = useInjectionState((share
                 (limitOptions[user.id]
                   ? limitOptions[user.id]?.show
                   : parseProp(c.meta).isLimitOption
-                  ? !(parseProp(c.meta).limitOptions || []).length
-                  : true)
+                    ? !(parseProp(c.meta).limitOptions || []).length
+                    : true)
               ) {
                 return true
               }
@@ -816,7 +816,7 @@ const [useProvideSharedFormStore, useSharedFormStore] = useInjectionState((share
   watch(
     () => sharedFormView.value?.heading,
     () => {
-      useTitle(`${sharedFormView.value?.heading ?? 'NocoDB'}`)
+      useTitle(`${sharedFormView.value?.heading ?? 'NexTable'}`)
     },
     {
       flush: 'post',
@@ -832,7 +832,7 @@ const [useProvideSharedFormStore, useSharedFormStore] = useInjectionState((share
             .map((title) => fieldMappings.value[title])
             .filter((v) => v !== undefined),
         )
-      } catch {}
+      } catch { }
     },
     {
       deep: true,

@@ -1,4 +1,4 @@
-Data Exporter extension is designed to simplify the process of exporting data from your NocoDB tables. With just a few clicks, you can effortlessly download CSV files for any specific table and view within your base.
+Data Exporter extension is designed to simplify the process of exporting data from your NexTable tables. With just a few clicks, you can effortlessly download CSV files for any specific table and view within your base.
 </br> </br>
 
 The download process is handled asynchronously in the background, ensuring that your workflow remains uninterrupted. Once your file is ready, you’ll receive a notification, allowing you to download the CSV at your convenience.
@@ -11,7 +11,7 @@ The download process is handled asynchronously in the background, ensuring that 
 - Instant notifications when the file is ready for download
   </br> </br>
 
-Elevate your data handling capabilities with the NocoDB Data Exporter extension!
+Elevate your data handling capabilities with the NexTable Data Exporter extension!
 </br></br>
 
 <!-- Todo: Add docs link -->

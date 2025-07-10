@@ -68,9 +68,9 @@ export const extractMultiOrSingleSelectProps = (colData: []) => {
     const flattenedVals = colData.flatMap((v: any) =>
       v
         ? v
-            .toString()
-            .trim()
-            .split(/\s*,\s*/)
+          .toString()
+          .trim()
+          .split(/\s*,\s*/)
         : [],
     )
 
@@ -121,9 +121,9 @@ export const extractSelectOptions = (colData: [], type: UITypes.SingleSelect | U
     const flattenedVals = colData.flatMap((v: any) =>
       v
         ? v
-            .toString()
-            .trim()
-            .split(/\s*,\s*/)
+          .toString()
+          .trim()
+          .split(/\s*,\s*/)
         : [],
     )
     const uniqueVals = [...new Set(flattenedVals.map((v: any) => v.toString().trim()))]
@@ -253,7 +253,7 @@ export const getFormattedViewTabTitle = ({
   isSharedView?: boolean
 }) => {
   if (isSharedView) {
-    return viewName || 'NocoDB'
+    return viewName || 'NexTable'
   }
 
   let title = `${viewName} | ${tableName} | ${baseName}`

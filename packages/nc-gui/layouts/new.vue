@@ -17,7 +17,7 @@ const email = computed(() => user.value?.email ?? '---')
 
 const refreshSidebar = ref(false)
 
-useTitle(route.meta?.title && te(route.meta.title) ? `${t(route.meta.title)}` : 'NocoDB')
+useTitle(route.meta?.title && te(route.meta.title) ? `${t(route.meta.title)}` : 'NexTable')
 
 const isPublic = computed(() => route.meta?.public)
 
@@ -77,8 +77,7 @@ export default {
           <a-dropdown v-if="!isPublic" :trigger="['click']" overlay-class-name="nc-dropdown-user-accounts-menu">
             <div class="flex items-center gap-1 cursor-pointer" data-testid="nc-ws-account-menu-dropdown">
               <div
-                class="h-8.5 w-8.5 rounded-full text-xs bg-secondary flex items-center justify-center font-weight-bold text-black uppercase"
-              >
+                class="h-8.5 w-8.5 rounded-full text-xs bg-secondary flex items-center justify-center font-weight-bold text-black uppercase">
                 {{ email ? email.split('@')[0].slice(0, 2) : 'A' }}
               </div>
               <MaterialSymbolsKeyboardArrowDownRounded />
@@ -87,7 +86,8 @@ export default {
             <template #overlay>
               <a-menu class="!py-0 leading-8 !rounded min-w-40">
                 <a-menu-item key="0" data-testid="nc-menu-accounts__user-settings" class="!rounded-t">
-                  <nuxt-link v-e="['c:navbar:user:email']" class="nc-base-menu-item group !no-underline" to="/account/users">
+                  <nuxt-link v-e="['c:navbar:user:email']" class="nc-base-menu-item group !no-underline"
+                    to="/account/users">
                     <MdiAccountCircleOutline class="mt-1 group-hover:text-accent" />&nbsp;
                     <div class="prose group-hover:text-primary">
                       <div>{{ $t('labels.account') }}</div>
@@ -111,12 +111,8 @@ export default {
                 <a-menu-divider class="!m-0" />
 
                 <a-menu-item key="1" class="!rounded-b group" data-testid="nc-menu-accounts__sign-out">
-                  <div
-                    v-e="['a:navbar:user:sign-out']"
-                    class="nc-base-menu-item group"
-                    data-testid="nc-logout-btn"
-                    @click="logout"
-                  >
+                  <div v-e="['a:navbar:user:sign-out']" class="nc-base-menu-item group" data-testid="nc-logout-btn"
+                    @click="logout">
                     <MdiLogout class="group-hover:text-accent" />&nbsp;
 
                     <span class="prose group-hover:text-primary">
@@ -132,17 +128,9 @@ export default {
     </a-layout-header>
     <!--    todo: change class name -->
     <a-layout class="nc-root">
-      <a-layout-sider
-        v-if="hasSidebar"
-        ref="sidebar"
-        :collapsed="!isOpen"
-        width="250"
-        collapsed-width="50"
+      <a-layout-sider v-if="hasSidebar" ref="sidebar" :collapsed="!isOpen" width="250" collapsed-width="50"
         class="relative shadow-md h-full z-1 nc-left-sidebar h-[calc(100vh_-_var(--new-header-height))] !shadow-none border-gray-100 border-r-1 !overflow-x-hidden"
-        :trigger="null"
-        collapsible
-        theme="light"
-      >
+        :trigger="null" collapsible theme="light">
         <slot name="sidebar" />
       </a-layout-sider>
       <div class="w-full h-[calc(100vh_-_var(--new-header-height))]">

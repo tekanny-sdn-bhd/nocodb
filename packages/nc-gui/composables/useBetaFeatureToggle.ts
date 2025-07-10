@@ -40,7 +40,7 @@ const FEATURES = [
   {
     id: 'model_context_protocol',
     title: 'Model Context Protocol',
-    description: 'Connect NocoDB base to Claude AI, Windsurf AI, and more.',
+    description: 'Connect NexTable base to Claude AI, Windsurf AI, and more.',
     enabled: false,
     version: 1,
     isEngineering: true,
@@ -48,7 +48,7 @@ const FEATURES = [
   {
     id: 'ai_features',
     title: 'AI features',
-    description: 'Unlock AI features to enhance your NocoDB experience.',
+    description: 'Unlock AI features to enhance your NexTable experience.',
     enabled: true,
     version: 2,
     isEE: true,
@@ -56,7 +56,7 @@ const FEATURES = [
   {
     id: 'ai_beta_features',
     title: 'AI beta features',
-    description: 'Unlock AI beta features to enhance your NocoDB experience.',
+    description: 'Unlock AI beta features to enhance your NexTable experience.',
     enabled: false,
     version: 1,
     isEngineering: true,
@@ -64,8 +64,8 @@ const FEATURES = [
   },
   {
     id: 'nocodb_scripts',
-    title: 'NocoDB Scripts',
-    description: 'Enable NocoDB Scripts to automate repetitive workflow',
+    title: 'NexTable Scripts',
+    description: 'Enable NexTable Scripts to automate repetitive workflow',
     enabled: true,
     version: 2,
     isEE: true,
@@ -99,7 +99,7 @@ const FEATURES = [
   {
     id: 'import_from_nocodb',
     title: 'OSS to Enterprise migration',
-    description: 'Enable import from NocoDB OSS instance to Enterprise Edition.',
+    description: 'Enable import from NexTable OSS instance to Enterprise Edition.',
     enabled: true,
     version: 1,
     isEE: true,
@@ -132,7 +132,7 @@ const FEATURES = [
   {
     id: 'extensions',
     title: 'Extensions',
-    description: 'Extensions allows you to add new features or functionalities to the NocoDB platform.',
+    description: 'Extensions allows you to add new features or functionalities to the NexTable platform.',
     enabled: ncIsPlaywright(),
     version: 3,
     isEngineering: true,

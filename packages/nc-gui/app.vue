@@ -110,12 +110,12 @@ const debounce = (callback: (...args: any[]) => void, delay: number) => {
 }
 
 const _ = (window as any).ResizeObserver
-;(window as any).ResizeObserver = class ResizeObserver extends _ {
-  constructor(callback: (...args: any[]) => void) {
-    callback = debounce(callback, 20)
-    super(callback)
+  ; (window as any).ResizeObserver = class ResizeObserver extends _ {
+    constructor(callback: (...args: any[]) => void) {
+      callback = debounce(callback, 20)
+      super(callback)
+    }
   }
-}
 </script>
 
 <template>
@@ -130,19 +130,12 @@ const _ = (window as any).ResizeObserver
   <ErrorBoundary>
     <div>
       <!-- Command Menu -->
-      <CmdK
-        ref="commandPalette"
-        v-model:open="cmdK"
-        :scope="activeScope.scope"
-        :data="cmdData"
-        :placeholder="cmdPlaceholder"
-        :load-temporary-scope="loadTemporaryScope"
-        :set-active-cmd-view="setActiveCmdView"
-        @scope="onScope"
-      />
+      <CmdK ref="commandPalette" v-model:open="cmdK" :scope="activeScope.scope" :data="cmdData"
+        :placeholder="cmdPlaceholder" :load-temporary-scope="loadTemporaryScope" :set-active-cmd-view="setActiveCmdView"
+        @scope="onScope" />
       <!-- Recent Views. Cycles through recently visited Views -->
       <CmdL v-model:open="cmdL" :set-active-cmd-view="setActiveCmdView" />
-      <!-- Documentation. Integrated NocoDB Docs directly inside the Product -->
+      <!-- Documentation. Integrated NexTable Docs directly inside the Product -->
       <CmdJ />
       <DashboardFeatureExperimentation v-model:value="isExperimentalFeatureModalOpen" />
     </div>

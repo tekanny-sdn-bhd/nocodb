@@ -552,8 +552,8 @@ export function useMultiSelect(
             const dataArray: Row[] = isArrayStructure
               ? (unref(data) as Row[])
               : unref(data) instanceof Map
-              ? Array.from(unref(data) as Map<number, Row>, ([_name, value]) => value)
-              : (unref(data) as Row[])
+                ? Array.from(unref(data) as Map<number, Row>, ([_name, value]) => value)
+                : (unref(data) as Row[])
             return v2HandleFillValue({
               data: dataArray,
               rawMatrix,
@@ -1056,7 +1056,7 @@ export function useMultiSelect(
     if (clipboardData?.endsWith('\n')) {
       // Remove '\n' from the end of the clipboardData
       // When copying from XLS/XLSX files, there is an extra '\n' appended to the end
-      //   this overwrites one additional cell information when we paste in NocoDB
+      //   this overwrites one additional cell information when we paste in NexTable
       clipboardData = clipboardData.replace(/\n$/, '')
     }
 
@@ -1193,13 +1193,13 @@ export function useMultiSelect(
                 i < (dataRef as Row[]).length
                   ? (dataRef as Row[])[absoluteRowIndex]
                   : {
-                      row: {},
-                      oldRow: {},
-                      rowMeta: {
-                        isExistingRow: true,
-                        rowIndex: absoluteRowIndex,
-                      },
-                    }
+                    row: {},
+                    oldRow: {},
+                    rowMeta: {
+                      isExistingRow: true,
+                      rowIndex: absoluteRowIndex,
+                    },
+                  }
             } else {
               targetRow = (dataRef as Map<number, Row>).get(absoluteRowIndex) || {
                 row: {},
@@ -1403,23 +1403,23 @@ export function useMultiSelect(
                         ) {
                           await Promise.all([
                             result.link.length &&
-                              api.dbDataTableRow.nestedLink(
-                                meta.value?.id as string,
-                                columnObj.id as string,
-                                encodeURIComponent(pasteRowPk),
-                                result.link,
-                                {
-                                  viewId: activeView?.value?.id,
-                                },
-                              ),
+                            api.dbDataTableRow.nestedLink(
+                              meta.value?.id as string,
+                              columnObj.id as string,
+                              encodeURIComponent(pasteRowPk),
+                              result.link,
+                              {
+                                viewId: activeView?.value?.id,
+                              },
+                            ),
                             result.unlink.length &&
-                              api.dbDataTableRow.nestedUnlink(
-                                meta.value?.id as string,
-                                columnObj.id as string,
-                                encodeURIComponent(pasteRowPk),
-                                result.unlink,
-                                { viewId: activeView?.value?.id },
-                              ),
+                            api.dbDataTableRow.nestedUnlink(
+                              meta.value?.id as string,
+                              columnObj.id as string,
+                              encodeURIComponent(pasteRowPk),
+                              result.unlink,
+                              { viewId: activeView?.value?.id },
+                            ),
                           ])
 
                           rowObj.row[columnObj.title!] = value
@@ -1465,19 +1465,19 @@ export function useMultiSelect(
                         ) {
                           await Promise.all([
                             result.unlink.length &&
-                              api.dbDataTableRow.nestedLink(
-                                meta.value?.id as string,
-                                columnObj.id as string,
-                                encodeURIComponent(pasteRowPk),
-                                result.unlink,
-                              ),
+                            api.dbDataTableRow.nestedLink(
+                              meta.value?.id as string,
+                              columnObj.id as string,
+                              encodeURIComponent(pasteRowPk),
+                              result.unlink,
+                            ),
                             result.link.length &&
-                              api.dbDataTableRow.nestedUnlink(
-                                meta.value?.id as string,
-                                columnObj.id as string,
-                                encodeURIComponent(pasteRowPk),
-                                result.link,
-                              ),
+                            api.dbDataTableRow.nestedUnlink(
+                              meta.value?.id as string,
+                              columnObj.id as string,
+                              encodeURIComponent(pasteRowPk),
+                              result.link,
+                            ),
                           ])
 
                           rowObj.row[columnObj.title!] = value
@@ -1521,23 +1521,23 @@ export function useMultiSelect(
                       ) {
                         await Promise.all([
                           result.link.length &&
-                            api.dbDataTableRow.nestedLink(
-                              meta.value?.id as string,
-                              columnObj.id as string,
-                              encodeURIComponent(pasteRowPk),
-                              result.link,
-                              {
-                                viewId: activeView?.value?.id,
-                              },
-                            ),
+                          api.dbDataTableRow.nestedLink(
+                            meta.value?.id as string,
+                            columnObj.id as string,
+                            encodeURIComponent(pasteRowPk),
+                            result.link,
+                            {
+                              viewId: activeView?.value?.id,
+                            },
+                          ),
                           result.unlink.length &&
-                            api.dbDataTableRow.nestedUnlink(
-                              meta.value?.id as string,
-                              columnObj.id as string,
-                              encodeURIComponent(pasteRowPk),
-                              result.unlink,
-                              { viewId: activeView?.value?.id },
-                            ),
+                          api.dbDataTableRow.nestedUnlink(
+                            meta.value?.id as string,
+                            columnObj.id as string,
+                            encodeURIComponent(pasteRowPk),
+                            result.unlink,
+                            { viewId: activeView?.value?.id },
+                          ),
                         ])
 
                         rowObj.row[columnObj.title!] = value
@@ -1566,19 +1566,19 @@ export function useMultiSelect(
                       ) {
                         await Promise.all([
                           result.unlink.length &&
-                            api.dbDataTableRow.nestedLink(
-                              meta.value?.id as string,
-                              columnObj.id as string,
-                              encodeURIComponent(pasteRowPk),
-                              result.unlink,
-                            ),
+                          api.dbDataTableRow.nestedLink(
+                            meta.value?.id as string,
+                            columnObj.id as string,
+                            encodeURIComponent(pasteRowPk),
+                            result.unlink,
+                          ),
                           result.link.length &&
-                            api.dbDataTableRow.nestedUnlink(
-                              meta.value?.id as string,
-                              columnObj.id as string,
-                              encodeURIComponent(pasteRowPk),
-                              result.link,
-                            ),
+                          api.dbDataTableRow.nestedUnlink(
+                            meta.value?.id as string,
+                            columnObj.id as string,
+                            encodeURIComponent(pasteRowPk),
+                            result.link,
+                          ),
                         ])
 
                         rowObj.row[columnObj.title!] = value

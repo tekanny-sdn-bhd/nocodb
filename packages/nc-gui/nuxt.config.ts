@@ -34,9 +34,9 @@ export default defineNuxtConfig({
     pageTransition: process.env.NUXT_PAGE_TRANSITION_DISABLE
       ? false
       : {
-          name: 'page',
-          mode: 'out-in',
-        },
+        name: 'page',
+        mode: 'out-in',
+      },
     // layoutTransition: process.env.NUXT_PAGE_TRANSITION_DISABLE
     //   ? false
     //   : {
@@ -58,15 +58,15 @@ export default defineNuxtConfig({
 
         ...(process.env.NC_CDN_URL
           ? [
-              {
-                rel: 'preload',
-                as: 'font',
-                href: new URL('/shared/style/material.woff2', process.env.NC_CDN_URL).href,
-                type: 'font/woff2',
-                crossorigin: 'anonymous',
-              } as any,
-              { rel: 'stylesheet', href: new URL('/shared/style/fonts-new.css', process.env.NC_CDN_URL).href },
-            ]
+            {
+              rel: 'preload',
+              as: 'font',
+              href: new URL('/shared/style/material.woff2', process.env.NC_CDN_URL).href,
+              type: 'font/woff2',
+              crossorigin: 'anonymous',
+            } as any,
+            { rel: 'stylesheet', href: new URL('/shared/style/fonts-new.css', process.env.NC_CDN_URL).href },
+          ]
           : []),
       ],
       meta: [
@@ -81,24 +81,24 @@ export default defineNuxtConfig({
           content: process.env.npm_package_description || '',
         },
         // Open Graph
-        { hid: 'og:site_name', property: 'og:site_name', content: 'NocoDB' },
+        { hid: 'og:site_name', property: 'og:site_name', content: 'NexTable' },
         { hid: 'og:type', property: 'og:type', content: 'website' },
-        { hid: 'og:title', property: 'og:title', content: 'NocoDB' },
+        { hid: 'og:title', property: 'og:title', content: 'NexTable' },
         {
           hid: 'og:description',
           property: 'og:description',
           content:
-            'NocoDB provides an intuitive spreadsheet interface for creating online databases, either from scratch or by connecting to any Postgres/MySQL. Access your data through interactive UIs or via API and SQL. Get started for free.',
+            'NexTable provides an intuitive spreadsheet interface for creating online databases, either from scratch or by connecting to any Postgres/MySQL. Access your data through interactive UIs or via API and SQL. Get started for free.',
         },
         { hid: 'og:url', property: 'og:url', content: 'https://nocodb.com' },
         // Twitter
         { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
-        { hid: 'twitter:title', name: 'twitter:title', content: 'NocoDB' },
+        { hid: 'twitter:title', name: 'twitter:title', content: 'NexTable' },
         {
           hid: 'twitter:description',
           name: 'twitter:description',
           content:
-            'NocoDB provides an intuitive spreadsheet interface for creating online databases, either from scratch or by connecting to any Postgres/MySQL. Access your data through interactive UIs or via API and SQL. Get started for free.',
+            'NexTable provides an intuitive spreadsheet interface for creating online databases, either from scratch or by connecting to any Postgres/MySQL. Access your data through interactive UIs or via API and SQL. Get started for free.',
         },
         {
           hid: 'twitter:image',

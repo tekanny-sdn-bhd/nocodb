@@ -32,17 +32,13 @@ onMounted(async () => {
     </template>
     <template #leftPanel="{ class: leftPanelClass }">
       <div :class="leftPanelClass">
-        <div
-          v-if="!dataReflectionEnabled"
-          class="nc-nocodb-connection-details-placeholder flex flex-col gap-8 w-full h-full items-center justify-center text-center mt-10"
-        >
-          <img
-            src="~assets/img/placeholder/nocodb-pg-integration.png"
-            class="!w-full !max-w-[864px] flex-none"
-            alt="NocoDb X Pg integration"
-          />
+        <div v-if="!dataReflectionEnabled"
+          class="nc-nocodb-connection-details-placeholder flex flex-col gap-8 w-full h-full items-center justify-center text-center mt-10">
+          <img src="~assets/img/placeholder/nocodb-pg-integration.png" class="!w-full !max-w-[864px] flex-none"
+            alt="NocoDb X Pg integration" />
           <span class="text-base font-bold">Connect with your favorite tools</span>
-          <span class="text-sm text-nc-content-gray-subtle2">Integrate with your favourite tools by bypassing our APIs</span>
+          <span class="text-sm text-nc-content-gray-subtle2">Integrate with your favourite tools by bypassing our
+            APIs</span>
           <NcButton size="small" type="primary" @click="createConnectionDetails"> Get connection details </NcButton>
           <div>
             <!-- For spacing  -->
@@ -52,22 +48,15 @@ onMounted(async () => {
           <div class="h-full max-h-[calc(100%_-_65px)] flex">
             <div class="connection-details-left-panel nc-scrollbar-thin relative">
               <div v-if="connectionDetails" class="h-full w-[768px] mx-auto">
-                <a-form
-                  ref="form"
-                  :model="connectionDetails"
-                  hide-required-mark
-                  name="external-base-create-form"
-                  layout="vertical"
-                  no-style
-                  class="flex flex-col gap-5.5"
-                >
+                <a-form ref="form" :model="connectionDetails" hide-required-mark name="external-base-create-form"
+                  layout="vertical" no-style class="flex flex-col gap-5.5">
                   <div class="nc-form-section">
                     <div class="nc-form-section-title">General</div>
                     <div class="nc-form-section-body">
                       <a-row :gutter="24">
                         <a-col :span="12">
                           <a-form-item label="Connection name">
-                            <a-input value="NocoDB" disabled />
+                            <a-input value="NexTable" disabled />
                           </a-form-item>
                         </a-col>
                       </a-row>
@@ -108,7 +97,8 @@ onMounted(async () => {
                         </a-col>
                         <a-col :span="12">
                           <a-form-item label="Password">
-                            <LazyGeneralCopyInput v-model="connectionDetails.password" password class="nc-connection-password" />
+                            <LazyGeneralCopyInput v-model="connectionDetails.password" password
+                              class="nc-connection-password" />
                           </a-form-item>
                         </a-col>
                       </a-row>
@@ -121,7 +111,8 @@ onMounted(async () => {
                         </a-col>
                         <a-col :span="12">
                           <a-form-item label="Schema">
-                            <LazyWorkspaceIntegrationsConnectSchemaInput v-model="selectedBase" class="nc-connection-schema" />
+                            <LazyWorkspaceIntegrationsConnectSchemaInput v-model="selectedBase"
+                              class="nc-connection-schema" />
                           </a-form-item>
                         </a-col>
                       </a-row>
@@ -155,6 +146,7 @@ onMounted(async () => {
 :deep(.ant-collapse-header) {
   @apply !-mt-4 !p-0 flex items-center !cursor-default children:first:flex;
 }
+
 :deep(.ant-collapse-icon-position-right > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow) {
   @apply !right-0;
 }
@@ -184,6 +176,7 @@ onMounted(async () => {
 }
 
 .connection-details {
+
   :deep(.ant-input-affix-wrapper),
   :deep(.ant-input),
   :deep(.ant-select) {
@@ -203,9 +196,11 @@ onMounted(async () => {
   .nc-form-section {
     @apply flex flex-col gap-3;
   }
+
   .nc-form-section-title {
     @apply text-sm font-bold text-gray-800;
   }
+
   .nc-form-section-body {
     @apply flex flex-col gap-3;
   }
@@ -226,9 +221,11 @@ onMounted(async () => {
         &:not(:hover):not(:focus):not(:disabled) {
           @apply shadow-default;
         }
+
         &:hover:not(:focus):not(:disabled) {
           @apply shadow-hover;
         }
+
         &:focus {
           @apply shadow-error ring-0;
         }
@@ -239,34 +236,42 @@ onMounted(async () => {
         &:not(:hover):not(:focus-within):not(:disabled) {
           @apply shadow-default;
         }
+
         &:hover:not(:focus-within):not(:disabled) {
           @apply shadow-hover;
         }
+
         &:focus-within {
           @apply shadow-error ring-0;
         }
       }
     }
+
     &:not(.ant-form-item-has-error) {
       &:not(:has(.ant-input-password)) .ant-input {
         &:not(:hover):not(:focus):not(:disabled) {
           @apply shadow-default border-gray-200;
         }
+
         &:hover:not(:focus):not(:disabled) {
           @apply border-gray-200 shadow-hover;
         }
+
         &:focus {
           @apply shadow-selected ring-0;
         }
       }
+
       .ant-input-number,
       .ant-input-affix-wrapper.ant-input-password {
         &:not(:hover):not(:focus-within):not(:disabled) {
           @apply shadow-default border-gray-200;
         }
+
         &:hover:not(:focus-within):not(:disabled) {
           @apply border-gray-200 shadow-hover;
         }
+
         &:focus-within {
           @apply shadow-selected ring-0;
         }
@@ -276,7 +281,8 @@ onMounted(async () => {
 
   :deep(.ant-row:not(.ant-form-item)) {
     @apply !-mx-1.5;
-    & > .ant-col {
+
+    &>.ant-col {
       @apply !px-1.5;
     }
   }

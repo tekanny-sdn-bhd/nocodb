@@ -32,13 +32,13 @@ const { isFeatureEnabled } = useBetaFeatureToggle()
 const isDeleteIntegrationModalOpen = ref(false)
 const toBeDeletedIntegration = ref<
   | (IntegrationType & {
-      sources?: {
-        id: string
-        alias: string
-        project_title: string
-        base_id: string
-      }[]
-    })
+    sources?: {
+      id: string
+      alias: string
+      project_title: string
+      base_id: string
+    }[]
+  })
   | null
 >(null)
 
@@ -57,11 +57,11 @@ const { width } = useElementBounding(titleHeaderCellRef)
 const collaboratorsMap = computed<Map<string, (WorkspaceUserType & { id: string }) | User | UserType>>(() => {
   const map = new Map()
 
-  ;(isEeUI ? allCollaborators.value : localCollaborators.value)?.forEach((coll) => {
-    if (coll?.id) {
-      map.set(coll.id, coll)
-    }
-  })
+    ; (isEeUI ? allCollaborators.value : localCollaborators.value)?.forEach((coll) => {
+      if (coll?.id) {
+        map.set(coll.id, coll)
+      }
+    })
   return map
 })
 
@@ -95,8 +95,8 @@ const filteredIntegrations = computed(() =>
               ? -1
               : 1
             : collaboratorsMap.value.get(a.created_by)?.email > collaboratorsMap.value.get(b.created_by)?.email
-            ? -1
-            : 1
+              ? -1
+              : 1
         }
       } else if (orderBy.value.source_count) {
         if (a.source_count !== undefined && b.source_count !== undefined) {
@@ -118,7 +118,7 @@ async function loadConnections(
     }
 
     await loadIntegrations(null, undefined, updateCurrentPage ? 1 : page, limit)
-  } catch {}
+  } catch { }
 }
 
 const handleChangePage = async (page: number) => {
@@ -267,20 +267,17 @@ onKeyStroke('ArrowDown', onDown)
       <div class="text-sm font-normal text-gray-600">
         <div>
           {{ $t('msg.manageConnections') }}
-          <a target="_blank" href="https://docs.nocodb.com/integrations/actions-on-connection" rel="noopener noreferrer">
+          <a target="_blank" href="https://docs.nocodb.com/integrations/actions-on-connection"
+            rel="noopener noreferrer">
             {{ $t('msg.learnMore') }}
           </a>
         </div>
       </div>
       <div class="flex items-center gap-3">
-        <a-input
-          v-model:value="searchQuery"
-          type="text"
+        <a-input v-model:value="searchQuery" type="text"
           class="nc-search-integration-input !min-w-[300px] !max-w-[400px] nc-input-sm flex-none"
-          :placeholder="`${$t('general.search')} ${$t('general.connections').toLowerCase()}`"
-          allow-clear
-          @input="handleSearchConnection"
-        >
+          :placeholder="`${$t('general.search')} ${$t('general.connections').toLowerCase()}`" allow-clear
+          @input="handleSearchConnection">
           <template #prefix>
             <GeneralIcon icon="search" class="mr-2 h-4 w-4 text-gray-500" />
           </template>
@@ -288,119 +285,72 @@ onKeyStroke('ArrowDown', onDown)
       </div>
     </div>
     <div class="table-container relative flex-1">
-      <div
-        ref="tableWrapper"
+      <div ref="tableWrapper"
         class="nc-workspace-integration-table relative nc-scrollbar-thin !overflow-auto max-h-[calc(100%_-_40px)]"
         :class="{
           'h-full': filteredIntegrations?.length,
-        }"
-      >
+        }">
         <table class="!sticky top-0 z-5 w-full">
           <thead>
             <tr>
-              <th
-                class="cell-title !hover:bg-gray-100 select-none cursor-pointer"
-                :class="{
-                  'cursor-not-allowed': !filteredIntegrations?.length,
-                  '!text-gray-700': orderBy.title,
-                }"
-                @click="updateOrderBy('title')"
-              >
+              <th class="cell-title !hover:bg-gray-100 select-none cursor-pointer" :class="{
+                'cursor-not-allowed': !filteredIntegrations?.length,
+                '!text-gray-700': orderBy.title,
+              }" @click="updateOrderBy('title')">
                 <div ref="titleHeaderCellRef" class="flex items-center gap-3">
                   <div>{{ $t('general.name') }}</div>
-                  <GeneralIcon
-                    v-if="orderBy.title"
-                    icon="chevronDown"
-                    class="flex-none"
-                    :class="{
-                      'transform rotate-180': orderBy?.title === 'asc',
-                    }"
-                  />
+                  <GeneralIcon v-if="orderBy.title" icon="chevronDown" class="flex-none" :class="{
+                    'transform rotate-180': orderBy?.title === 'asc',
+                  }" />
                   <GeneralIcon v-else icon="chevronUpDown" class="flex-none" />
                 </div>
               </th>
 
-              <th
-                class="cell-type !hover:bg-gray-100 select-none cursor-pointer"
-                :class="{
-                  'cursor-not-allowed': !filteredIntegrations?.length,
-                  '!text-gray-700': orderBy.sub_type,
-                }"
-                @click="updateOrderBy('sub_type')"
-              >
+              <th class="cell-type !hover:bg-gray-100 select-none cursor-pointer" :class="{
+                'cursor-not-allowed': !filteredIntegrations?.length,
+                '!text-gray-700': orderBy.sub_type,
+              }" @click="updateOrderBy('sub_type')">
                 <div class="flex items-center gap-3">
                   <div>{{ $t('general.type') }}</div>
-                  <GeneralIcon
-                    v-if="orderBy.sub_type"
-                    icon="chevronDown"
-                    class="flex-none"
-                    :class="{
-                      'transform rotate-180': orderBy.sub_type === 'asc',
-                    }"
-                  />
+                  <GeneralIcon v-if="orderBy.sub_type" icon="chevronDown" class="flex-none" :class="{
+                    'transform rotate-180': orderBy.sub_type === 'asc',
+                  }" />
                   <GeneralIcon v-else icon="chevronUpDown" class="flex-none" />
                 </div>
               </th>
 
-              <th
-                class="cell-created-date !hover:bg-gray-100 select-none cursor-pointer"
-                :class="{
-                  'cursor-not-allowed': !filteredIntegrations?.length,
-                  '!text-gray-700': orderBy.created_at,
-                }"
-                @click="updateOrderBy('created_at')"
-              >
+              <th class="cell-created-date !hover:bg-gray-100 select-none cursor-pointer" :class="{
+                'cursor-not-allowed': !filteredIntegrations?.length,
+                '!text-gray-700': orderBy.created_at,
+              }" @click="updateOrderBy('created_at')">
                 <div class="flex items-center gap-3">
                   <div>{{ $t('labels.dateAdded') }}</div>
-                  <GeneralIcon
-                    v-if="orderBy.created_at"
-                    icon="chevronDown"
-                    class="flex-none"
-                    :class="{
-                      'transform rotate-180': orderBy.created_at === 'asc',
-                    }"
-                  />
+                  <GeneralIcon v-if="orderBy.created_at" icon="chevronDown" class="flex-none" :class="{
+                    'transform rotate-180': orderBy.created_at === 'asc',
+                  }" />
                   <GeneralIcon v-else icon="chevronUpDown" class="flex-none" />
                 </div>
               </th>
-              <th
-                class="cell-added-by !hover:bg-gray-100 select-none cursor-pointer"
-                :class="{
-                  'cursor-not-allowed': !filteredIntegrations?.length,
-                  '!text-gray-700': orderBy.created_by,
-                }"
-                @click="updateOrderBy('created_by')"
-              >
+              <th class="cell-added-by !hover:bg-gray-100 select-none cursor-pointer" :class="{
+                'cursor-not-allowed': !filteredIntegrations?.length,
+                '!text-gray-700': orderBy.created_by,
+              }" @click="updateOrderBy('created_by')">
                 <div class="flex items-center gap-3">
                   <div>{{ $t('labels.addedBy') }}</div>
-                  <GeneralIcon
-                    v-if="orderBy.created_by"
-                    icon="chevronDown"
-                    class="flex-none"
-                    :class="{
-                      'transform rotate-180': orderBy.created_by === 'asc',
-                    }"
-                  />
+                  <GeneralIcon v-if="orderBy.created_by" icon="chevronDown" class="flex-none" :class="{
+                    'transform rotate-180': orderBy.created_by === 'asc',
+                  }" />
                   <GeneralIcon v-else icon="chevronUpDown" class="flex-none" />
                 </div>
               </th>
-              <th
-                class="cell-usage !hover:bg-gray-100 select-none cursor-pointer"
-                :class="{
-                  'cursor-not-allowed': !filteredIntegrations?.length,
-                }"
-                @click="updateOrderBy('source_count')"
-              >
+              <th class="cell-usage !hover:bg-gray-100 select-none cursor-pointer" :class="{
+                'cursor-not-allowed': !filteredIntegrations?.length,
+              }" @click="updateOrderBy('source_count')">
                 <div class="flex items-center gap-3">
                   <div>{{ $t('general.usage') }}</div>
-                  <GeneralIcon
-                    v-if="orderBy?.source_count"
-                    icon="chevronDown"
-                    class="flex-none"
-                    :class="{
-                      'transform rotate-180': orderBy?.source_count === 'asc',
-                    }"
-                  />
+                  <GeneralIcon v-if="orderBy?.source_count" icon="chevronDown" class="flex-none" :class="{
+                    'transform rotate-180': orderBy?.source_count === 'asc',
+                  }" />
                   <GeneralIcon v-else icon="chevronUpDown" class="flex-none" />
                 </div>
               </th>
@@ -413,14 +363,12 @@ onKeyStroke('ArrowDown', onDown)
         <template v-if="filteredIntegrations?.length">
           <table class="h-full max-h-[calc(100%_-_55px)] w-full">
             <tbody>
-              <tr v-for="integration of filteredIntegrations" :key="integration.id" @click="openEditIntegration(integration)">
+              <tr v-for="integration of filteredIntegrations" :key="integration.id"
+                @click="openEditIntegration(integration)">
                 <td class="cell-title">
-                  <div
-                    class="gap-3"
-                    :style="{
-                      maxWidth: `${width}px`,
-                    }"
-                  >
+                  <div class="gap-3" :style="{
+                    maxWidth: `${width}px`,
+                  }">
                     <NcTooltip placement="bottom" class="truncate" show-on-truncate-only>
                       <template #title> {{ integration.title }}</template>
                       {{ integration.title }}
@@ -428,20 +376,20 @@ onKeyStroke('ArrowDown', onDown)
                     <span v-if="integration.is_private">
                       <NcBadge :border="false" class="text-primary !h-4.5 bg-brand-50 text-xs">{{
                         $t('general.private')
-                      }}</NcBadge>
+                        }}</NcBadge>
                     </span>
                   </div>
                 </td>
 
                 <td class="cell-type">
                   <div>
-                    <NcTooltip placement="bottom" class="h-8 w-8 flex-none flex items-center justify-center children:flex-none">
-                      <template #title> {{ clientTypesMap[integration?.sub_type]?.text || integration?.sub_type }}</template>
+                    <NcTooltip placement="bottom"
+                      class="h-8 w-8 flex-none flex items-center justify-center children:flex-none">
+                      <template #title> {{ clientTypesMap[integration?.sub_type]?.text || integration?.sub_type
+                        }}</template>
 
-                      <GeneralIntegrationIcon
-                        :type="integration.sub_type"
-                        :size="integration.sub_type === SyncDataType.NOCODB ? 'xxl' : 'lg'"
-                      />
+                      <GeneralIntegrationIcon :type="integration.sub_type"
+                        :size="integration.sub_type === SyncDataType.NOCODB ? 'xxl' : 'lg'" />
                     </NcTooltip>
                   </div>
                 </td>
@@ -461,59 +409,41 @@ onKeyStroke('ArrowDown', onDown)
                       <div class="h-8 w-8 grid place-items-center">
                         <GeneralIcon icon="nocodb1" />
                       </div>
-                      <div class="text-sm !leading-5 capitalize font-semibold truncate">NocoDB Cloud</div>
+                      <div class="text-sm !leading-5 capitalize font-semibold truncate">NexTable Cloud</div>
                     </div>
                     <NcTooltip v-else :disabled="!isUserDeleted(integration.created_by)" class="w-full">
                       <template #title>
                         {{ `User not part of this ${isEeUI ? 'workspace' : 'organisation'} anymore` }}
                       </template>
-                      <div
-                        v-if="integration.created_by && collaboratorsMap.get(integration.created_by)?.email"
-                        class="w-full flex gap-3 items-center"
-                      >
-                        <GeneralUserIcon
-                          :user="collaboratorsMap.get(integration.created_by)"
-                          size="base"
-                          class="flex-none"
-                          :class="{
+                      <div v-if="integration.created_by && collaboratorsMap.get(integration.created_by)?.email"
+                        class="w-full flex gap-3 items-center">
+                        <GeneralUserIcon :user="collaboratorsMap.get(integration.created_by)" size="base"
+                          class="flex-none" :class="{
                             '!grayscale': isUserDeleted(integration.created_by),
-                          }"
-                          :style="
-                            isUserDeleted(integration.created_by)
+                          }" :style="isUserDeleted(integration.created_by)
                               ? {
-                                  filter: 'grayscale(100%) brightness(115%)',
-                                }
+                                filter: 'grayscale(100%) brightness(115%)',
+                              }
                               : {}
-                          "
-                        />
+                            " />
                         <div class="flex-1 flex flex-col max-w-[calc(100%_-_44px)]">
                           <div class="w-full flex gap-3">
-                            <NcTooltip
-                              class="text-sm !leading-5 capitalize font-semibold truncate"
-                              :class="{
-                                'text-gray-800': !isUserDeleted(integration.created_by),
-                                'text-gray-500': isUserDeleted(integration.created_by),
-                              }"
-                              :disabled="isUserDeleted(integration.created_by)"
-                              show-on-truncate-only
-                              placement="bottom"
-                            >
+                            <NcTooltip class="text-sm !leading-5 capitalize font-semibold truncate" :class="{
+                              'text-gray-800': !isUserDeleted(integration.created_by),
+                              'text-gray-500': isUserDeleted(integration.created_by),
+                            }" :disabled="isUserDeleted(integration.created_by)" show-on-truncate-only
+                              placement="bottom">
                               <template #title>
                                 {{ getUserNameByCreatedBy(integration.created_by) }}
                               </template>
                               {{ getUserNameByCreatedBy(integration.created_by) }}
                             </NcTooltip>
                           </div>
-                          <NcTooltip
-                            class="text-xs !leading-4 truncate"
-                            :class="{
-                              'text-gray-600': !isUserDeleted(integration.created_by),
-                              'text-gray-500': isUserDeleted(integration.created_by),
-                            }"
-                            :disabled="isUserDeleted(integration.created_by)"
-                            show-on-truncate-only
-                            placement="bottom"
-                          >
+                          <NcTooltip class="text-xs !leading-4 truncate" :class="{
+                            'text-gray-600': !isUserDeleted(integration.created_by),
+                            'text-gray-500': isUserDeleted(integration.created_by),
+                          }" :disabled="isUserDeleted(integration.created_by)" show-on-truncate-only
+                            placement="bottom">
                             <template #title>
                               {{ collaboratorsMap.get(integration.created_by)?.email }}
                             </template>
@@ -538,17 +468,12 @@ onKeyStroke('ArrowDown', onDown)
                         <NcMenu variant="small">
                           <NcMenuItem
                             v-if="integration.type && integrationCategoryNeedDefault(integration.type) && !integration.is_default"
-                            @click="setDefaultIntegration(integration)"
-                          >
+                            @click="setDefaultIntegration(integration)">
                             <GeneralIcon class="text-current opacity-80" icon="star" />
                             <span>Set as default</span>
                           </NcMenuItem>
-                          <NcMenuItem
-                            :disabled="
-                              !isFeatureEnabled(FEATURE_FLAG.DATA_REFLECTION) && integration.sub_type === SyncDataType.NOCODB
-                            "
-                            @click="openEditIntegration(integration)"
-                          >
+                          <NcMenuItem :disabled="!isFeatureEnabled(FEATURE_FLAG.DATA_REFLECTION) && integration.sub_type === SyncDataType.NOCODB
+                            " @click="openEditIntegration(integration)">
                             <GeneralIcon class="text-current opacity-80" icon="edit" />
                             <span>{{ $t('general.edit') }}</span>
                           </NcMenuItem>
@@ -562,19 +487,16 @@ onKeyStroke('ArrowDown', onDown)
                               }}
                             </template>
 
-                            <NcMenuItem
-                              :disabled="
-                                integration?.sub_type === ClientType.SQLITE || integration?.sub_type === SyncDataType.NOCODB
-                              "
-                              @click="duplicateIntegration(integration)"
-                            >
+                            <NcMenuItem :disabled="integration?.sub_type === ClientType.SQLITE || integration?.sub_type === SyncDataType.NOCODB
+                              " @click="duplicateIntegration(integration)">
                               <GeneralIcon class="text-current opacity-80" icon="duplicate" />
                               <span>{{ $t('general.duplicate') }}</span>
                             </NcMenuItem>
                           </NcTooltip>
                           <template v-if="integration?.sub_type !== SyncDataType.NOCODB">
                             <NcDivider />
-                            <NcMenuItem class="!text-red-500 !hover:bg-red-50" @click="openDeleteIntegration(integration)">
+                            <NcMenuItem class="!text-red-500 !hover:bg-red-50"
+                              @click="openDeleteIntegration(integration)">
                               <GeneralIcon icon="delete" />
                               {{ $t('general.delete') }}
                             </NcMenuItem>
@@ -590,29 +512,20 @@ onKeyStroke('ArrowDown', onDown)
         </template>
       </div>
 
-      <div
-        v-show="isLoadingIntegrations"
-        class="flex items-center justify-center absolute left-0 top-0 w-full h-full z-10 pb-10 pointer-events-none"
-      >
+      <div v-show="isLoadingIntegrations"
+        class="flex items-center justify-center absolute left-0 top-0 w-full h-full z-10 pb-10 pointer-events-none">
         <div class="flex flex-col justify-center items-center gap-2">
           <GeneralLoader size="xlarge" />
           <span class="text-center">{{ $t('general.loading') }}</span>
         </div>
       </div>
 
-      <div
-        v-if="!isLoadingIntegrations && (!integrations?.length || !filteredIntegrations.length)"
-        class="flex-none integration-table-empty flex items-center justify-center py-8 px-6 h-full max-h-[calc(100%_-_94px)]"
-      >
-        <div
-          v-if="integrations?.length && !filteredIntegrations.length"
-          class="px-2 py-6 text-gray-500 flex flex-col items-center gap-6 text-center"
-        >
-          <img
-            src="~assets/img/placeholder/no-search-result-found.png"
-            class="!w-[164px] flex-none"
-            alt="No search results found"
-          />
+      <div v-if="!isLoadingIntegrations && (!integrations?.length || !filteredIntegrations.length)"
+        class="flex-none integration-table-empty flex items-center justify-center py-8 px-6 h-full max-h-[calc(100%_-_94px)]">
+        <div v-if="integrations?.length && !filteredIntegrations.length"
+          class="px-2 py-6 text-gray-500 flex flex-col items-center gap-6 text-center">
+          <img src="~assets/img/placeholder/no-search-result-found.png" class="!w-[164px] flex-none"
+            alt="No search results found" />
 
           {{ $t('title.noResultsMatchedYourSearch') }}
         </div>
@@ -621,42 +534,30 @@ onKeyStroke('ArrowDown', onDown)
           <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" :description="$t('labels.noData')" class="!my-0" />
         </div>
       </div>
-      <div
-        v-if="integrationPaginationData.totalRows"
-        class="flex flex-row justify-center items-center bg-gray-50 min-h-10"
-        :class="{
+      <div v-if="integrationPaginationData.totalRows"
+        class="flex flex-row justify-center items-center bg-gray-50 min-h-10" :class="{
           'pointer-events-none': isLoadingIntegrations,
-        }"
-      >
+        }">
         <div class="flex justify-between items-center w-full px-6">
           <div>&nbsp;</div>
-          <NcPagination
-            v-model:current="integrationPaginationData.page"
-            v-model:page-size="integrationPaginationData.pageSize"
-            :total="+integrationPaginationData.totalRows"
-            show-size-changer
-            :use-stored-page-size="false"
-            :prev-page-tooltip="`${renderAltOrOptlKey()}+←`"
-            :next-page-tooltip="`${renderAltOrOptlKey()}+→`"
-            :first-page-tooltip="`${renderAltOrOptlKey()}+↓`"
+          <NcPagination v-model:current="integrationPaginationData.page"
+            v-model:page-size="integrationPaginationData.pageSize" :total="+integrationPaginationData.totalRows"
+            show-size-changer :use-stored-page-size="false" :prev-page-tooltip="`${renderAltOrOptlKey()}+←`"
+            :next-page-tooltip="`${renderAltOrOptlKey()}+→`" :first-page-tooltip="`${renderAltOrOptlKey()}+↓`"
             :last-page-tooltip="`${renderAltOrOptlKey()}+↑`"
             @update:current="loadConnections(undefined, undefined, false)"
-            @update:page-size="loadConnections(integrationPaginationData.page, $event, false)"
-          />
+            @update:page-size="loadConnections(integrationPaginationData.page, $event, false)" />
           <div class="text-gray-500 text-xs">
-            {{ integrationPaginationData.totalRows }} {{ integrationPaginationData.totalRows === 1 ? 'record' : 'records' }}
+            {{ integrationPaginationData.totalRows }} {{ integrationPaginationData.totalRows === 1 ? 'record' :
+            'records' }}
           </div>
         </div>
       </div>
     </div>
 
-    <GeneralDeleteModal
-      v-model:visible="isDeleteIntegrationModalOpen"
-      :entity-name="$t('general.connection')"
-      :on-delete="onDeleteConfirm"
-      :delete-label="$t('general.delete')"
-      :show-default-delete-msg="!isLoadingGetLinkedSources && !toBeDeletedIntegration?.sources?.length"
-    >
+    <GeneralDeleteModal v-model:visible="isDeleteIntegrationModalOpen" :entity-name="$t('general.connection')"
+      :on-delete="onDeleteConfirm" :delete-label="$t('general.delete')"
+      :show-default-delete-msg="!isLoadingGetLinkedSources && !toBeDeletedIntegration?.sources?.length">
       <template #entity-preview>
         <template v-if="isLoadingGetLinkedSources">
           <div class="rounded-lg overflow-hidden">
@@ -669,31 +570,23 @@ onKeyStroke('ArrowDown', onDown)
         <div v-else-if="toBeDeletedIntegration" class="w-full flex flex-col text-gray-800">
           <div class="flex flex-row items-center py-2 px-3.25 bg-gray-50 rounded-lg text-gray-700 mb-4">
             <GeneralIntegrationIcon :type="toBeDeletedIntegration.sub_type" />
-            <div
-              class="text-ellipsis overflow-hidden select-none w-full pl-3"
-              :style="{ wordBreak: 'keep-all', whiteSpace: 'nowrap', display: 'inline' }"
-            >
+            <div class="text-ellipsis overflow-hidden select-none w-full pl-3"
+              :style="{ wordBreak: 'keep-all', whiteSpace: 'nowrap', display: 'inline' }">
               {{ toBeDeletedIntegration.title }}
             </div>
           </div>
-          <div v-if="toBeDeletedIntegration?.sources?.length" class="flex flex-col pb-2 text-small leading-[18px] text-gray-500">
+          <div v-if="toBeDeletedIntegration?.sources?.length"
+            class="flex flex-col pb-2 text-small leading-[18px] text-gray-500">
             <div class="mb-1">Following external data sources using this connection will also be removed</div>
             <ul class="!list-disc ml-6 mb-0">
-              <li
-                v-for="(source, idx) of toBeDeletedIntegration.sources"
-                :key="idx"
-                class="marker:text-gray-500 !marker:(flex items-center !-mt-1)"
-              >
+              <li v-for="(source, idx) of toBeDeletedIntegration.sources" :key="idx"
+                class="marker:text-gray-500 !marker:(flex items-center !-mt-1)">
                 <div class="flex items-center gap-1">
                   <div class="flex items-center">
                     &nbsp;
-                    <GeneralProjectIcon
-                      type="database"
-                      class="!grayscale min-w-5 flex-none -ml-1"
-                      :style="{
-                        filter: 'grayscale(100%) brightness(115%)',
-                      }"
-                    />
+                    <GeneralProjectIcon type="database" class="!grayscale min-w-5 flex-none -ml-1" :style="{
+                      filter: 'grayscale(100%) brightness(115%)',
+                    }" />
                   </div>
 
                   <NcTooltip class="!truncate !max-w-[45%] flex-none" show-on-truncate-only>
@@ -704,12 +597,9 @@ onKeyStroke('ArrowDown', onDown)
                     {{ source.project_title }}
                   </NcTooltip>
                   >
-                  <GeneralBaseLogo
-                    class="!grayscale min-w-4 flex-none"
-                    :style="{
-                      filter: 'grayscale(100%) brightness(115%)',
-                    }"
-                  />
+                  <GeneralBaseLogo class="!grayscale min-w-4 flex-none" :style="{
+                    filter: 'grayscale(100%) brightness(115%)',
+                  }" />
 
                   <NcTooltip class="truncate !max-w-[45%] capitalize" show-on-truncate-only>
                     <template #title>
@@ -727,7 +617,8 @@ onKeyStroke('ArrowDown', onDown)
       </template>
     </GeneralDeleteModal>
 
-    <NcModal v-model:visible="successConfirmModal.isOpen" centered size="small" @keydown.esc="successConfirmModal.isOpen = false">
+    <NcModal v-model:visible="successConfirmModal.isOpen" centered size="small"
+      @keydown.esc="successConfirmModal.isOpen = false">
       <div class="flex gap-4">
         <div>
           <GeneralIcon icon="circleCheckSolid" class="flex-none !text-green-700 mt-0.5 !h-6 !w-6" />
@@ -746,7 +637,8 @@ onKeyStroke('ArrowDown', onDown)
             {{ successConfirmModal.description }}
           </div>
 
-          <a target="_blank" href="https://docs.nocodb.com/data-sources/connect-to-data-source/" rel="noopener noreferrer">
+          <a target="_blank" href="https://docs.nocodb.com/data-sources/connect-to-data-source/"
+            rel="noopener noreferrer">
             Learn more
           </a>
         </div>
@@ -788,6 +680,7 @@ onKeyStroke('ArrowDown', onDown)
 
   .nc-workspace-integration-table {
     &.sticky-shadow {
+
       th,
       td {
         &.cell-title {
@@ -797,6 +690,7 @@ onKeyStroke('ArrowDown', onDown)
     }
 
     &:not(.sticky-shadow) {
+
       th,
       td {
         &.cell-title {
@@ -807,6 +701,7 @@ onKeyStroke('ArrowDown', onDown)
 
     thead {
       @apply w-full;
+
       th {
         @apply bg-gray-50 text-sm text-gray-500 font-weight-500;
 
@@ -818,6 +713,7 @@ onKeyStroke('ArrowDown', onDown)
 
     tbody {
       @apply w-full;
+
       tr {
         @apply cursor-pointer;
 
@@ -846,48 +742,54 @@ onKeyStroke('ArrowDown', onDown)
       td {
         @apply h-full;
 
-        & > div {
+        &>div {
           @apply px-6 h-full flex-1 flex items-center;
         }
 
         &.cell-title {
           @apply flex-1 sticky left-0 z-5;
-          & > div {
+
+          &>div {
             @apply min-w-[250px];
           }
         }
 
         &.cell-added-by {
           @apply basis-[20%];
-          & > div {
+
+          &>div {
             @apply min-w-[250px];
           }
         }
 
         &.cell-type {
           @apply w-[120px];
-          & > div {
+
+          &>div {
             @apply min-w-[98px];
           }
         }
 
         &.cell-created-date {
           @apply basis-[20%];
-          & > div {
+
+          &>div {
             @apply min-w-[158px];
           }
         }
 
         &.cell-usage {
           @apply w-[120px];
-          & > div {
+
+          &>div {
             @apply min-w-[118px];
           }
         }
 
         &.cell-actions {
           @apply w-[100px];
-          & > div {
+
+          &>div {
             @apply min-w-[98px];
           }
         }

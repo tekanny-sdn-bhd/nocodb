@@ -71,7 +71,8 @@ const code = computed(
 </script>
 
 <template>
-  <NcModal v-model:visible="modalVisible" :show-separator="true" size="large" wrap-class-name="nc-modal-mcp-token-create-edit">
+  <NcModal v-model:visible="modalVisible" :show-separator="true" size="large"
+    wrap-class-name="nc-modal-mcp-token-create-edit">
     <template #header>
       <div class="flex w-full items-center p-2 justify-between">
         <div class="flex items-center gap-3 pl-1 flex-1">
@@ -89,10 +90,8 @@ const code = computed(
       </div>
     </template>
     <div class="flex bg-white rounded-b-2xl h-[calc(100%_-_66px)]">
-      <div
-        ref="containerElem"
-        class="h-full flex-1 flex flex-col overflow-y-auto scroll-smooth nc-scrollbar-thin px-24 py-6 mx-auto"
-      >
+      <div ref="containerElem"
+        class="h-full flex-1 flex flex-col overflow-y-auto scroll-smooth nc-scrollbar-thin px-24 py-6 mx-auto">
         <div class="flex flex-col max-w-[640px] w-full mx-auto gap-3">
           <div class="text-nc-content-gray font-bold leading-6">
             {{ $t('labels.mcpSetup') }}
@@ -101,26 +100,25 @@ const code = computed(
           <NcTabs v-model:active-key="activeTab">
             <a-tab-pane key="claude" class="!h-full">
               <template #tab>
-                <span
-                  :class="{
-                    'text-brand-500 font-medium': activeTab === 'claude',
-                    'text-gray-700': activeTab !== 'claude',
-                  }"
-                  class="text-sm"
-                >
+                <span :class="{
+                  'text-brand-500 font-medium': activeTab === 'claude',
+                  'text-gray-700': activeTab !== 'claude',
+                }" class="text-sm">
                   Claude
                 </span>
               </template>
               <div class="relative flex flex-col leading-6 text-nc-content-gray-subtle2 gap-3 my-3">
-                Get started with the NocoDB MCP with Claude Desktop in 3 simple steps
+                Get started with the NexTable MCP with Claude Desktop in 3 simple steps
 
                 <ol class="list-decimal pl-5">
                   <li>Navigate to Claude Desktop settings from the navigation bar.</li>
                   <li>Go to the Develop Tab, and click on “Edit Config”.</li>
-                  <li>Add the JSON configuration that’s provided after creating a token in claude_desktop_config.json</li>
+                  <li>Add the JSON configuration that’s provided after creating a token in claude_desktop_config.json
+                  </li>
                 </ol>
 
-                <NcButton type="secondary" class="w-39" size="small" :loading="token.loading" @click="regenerateToken(token)">
+                <NcButton type="secondary" class="w-39" size="small" :loading="token.loading"
+                  @click="regenerateToken(token)">
                   {{ $t('labels.regenerateToken') }}
                 </NcButton>
 
@@ -129,18 +127,15 @@ const code = computed(
             </a-tab-pane>
             <a-tab-pane key="cursor" class="!h-full">
               <template #tab>
-                <span
-                  :class="{
-                    'text-brand-500 font-medium': activeTab === 'cursor',
-                    'text-gray-700': activeTab !== 'cursor',
-                  }"
-                  class="text-sm"
-                >
+                <span :class="{
+                  'text-brand-500 font-medium': activeTab === 'cursor',
+                  'text-gray-700': activeTab !== 'cursor',
+                }" class="text-sm">
                   Cursor
                 </span>
               </template>
               <div class="relative flex flex-col leading-6 text-nc-content-gray-subtle2 gap-3 my-3">
-                Get started with the NocoDB MCP with Cursor in 3 simple steps
+                Get started with the NexTable MCP with Cursor in 3 simple steps
 
                 <ol class="list-decimal pl-5">
                   <li>Open Cursor Settings (press Shift+Cmd+J)</li>
@@ -148,7 +143,8 @@ const code = computed(
                   <li>Add the JSON configuration that’s provided after creating a token.</li>
                 </ol>
 
-                <NcButton type="secondary" class="w-44" size="small" :loading="token.loading" @click="regenerateToken(token)">
+                <NcButton type="secondary" class="w-44" size="small" :loading="token.loading"
+                  @click="regenerateToken(token)">
                   {{ $t('labels.regenerateToken') }}
                 </NcButton>
                 <DashboardSettingsBaseMCPCode :key="code" :code="code" />
@@ -156,18 +152,15 @@ const code = computed(
             </a-tab-pane>
             <a-tab-pane key="windsurf" class="!h-full">
               <template #tab>
-                <span
-                  :class="{
-                    'text-brand-500 font-medium': activeTab === 'windsurf',
-                    'text-gray-700': activeTab !== 'windsurf',
-                  }"
-                  class="text-sm"
-                >
+                <span :class="{
+                  'text-brand-500 font-medium': activeTab === 'windsurf',
+                  'text-gray-700': activeTab !== 'windsurf',
+                }" class="text-sm">
                   Windsurf
                 </span>
               </template>
               <div class="relative flex flex-col leading-6 text-nc-content-gray-subtle2 gap-3 my-3">
-                Get started with the NocoDB MCP with Windsurf in 4 simple steps
+                Get started with the NexTable MCP with Windsurf in 4 simple steps
 
                 <ol class="list-decimal pl-5">
                   <li>Access Windsurf settings and Select Cascade Tab in the left sidebar</li>
@@ -176,7 +169,8 @@ const code = computed(
                   <li>Paste the JSON configuration that’s provided after creating a token in the opened file</li>
                 </ol>
 
-                <NcButton type="secondary" class="w-44" size="small" :loading="token.loading" @click="regenerateToken(token)">
+                <NcButton type="secondary" class="w-44" size="small" :loading="token.loading"
+                  @click="regenerateToken(token)">
                   {{ $t('labels.regenerateToken') }}
                 </NcButton>
 
@@ -204,12 +198,8 @@ const code = computed(
               <div class="h-7 w-7 flex items-center justify-center">
                 <GeneralIcon icon="bookOpen" class="flex-none w-4 h-4 text-gray-500" />
               </div>
-              <NuxtLink
-                :href="doc.href"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="!text-gray-500 text-sm !no-underline !hover:underline"
-              >
+              <NuxtLink :href="doc.href" target="_blank" rel="noopener noreferrer"
+                class="!text-gray-500 text-sm !no-underline !hover:underline">
                 {{ doc.title }}
               </NuxtLink>
             </div>
@@ -223,9 +213,11 @@ const code = computed(
 <style lang="scss">
 .nc-modal-mcp-token-create-edit {
   z-index: 1050;
+
   a {
     @apply !no-underline !text-gray-700 !hover:text-primary;
   }
+
   .nc-modal {
     @apply !p-0;
     height: min(calc(100vh - 100px), 1024px);

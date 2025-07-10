@@ -221,7 +221,7 @@ export function useCopyPaste({
     if (clipboardData?.endsWith('\n')) {
       // Remove '\n' from the end of the clipboardData
       // When copying from XLS/XLSX files, there is an extra '\n' appended to the end
-      //   this overwrites one additional cell information when we paste in NocoDB
+      //   this overwrites one additional cell information when we paste in NexTable
       clipboardData = clipboardData.replace(/\n$/, '')
     }
 
@@ -547,23 +547,23 @@ export function useCopyPaste({
                     ) {
                       await Promise.all([
                         result.link.length &&
-                          $api.dbDataTableRow.nestedLink(
-                            meta.value?.id as string,
-                            columnObj.id as string,
-                            encodeURIComponent(pasteRowPk),
-                            result.link,
-                            {
-                              viewId: view?.value?.id,
-                            },
-                          ),
+                        $api.dbDataTableRow.nestedLink(
+                          meta.value?.id as string,
+                          columnObj.id as string,
+                          encodeURIComponent(pasteRowPk),
+                          result.link,
+                          {
+                            viewId: view?.value?.id,
+                          },
+                        ),
                         result.unlink.length &&
-                          $api.dbDataTableRow.nestedUnlink(
-                            meta.value?.id as string,
-                            columnObj.id as string,
-                            encodeURIComponent(pasteRowPk),
-                            result.unlink,
-                            { viewId: view?.value?.id },
-                          ),
+                        $api.dbDataTableRow.nestedUnlink(
+                          meta.value?.id as string,
+                          columnObj.id as string,
+                          encodeURIComponent(pasteRowPk),
+                          result.unlink,
+                          { viewId: view?.value?.id },
+                        ),
                       ])
 
                       rowObj.row[columnObj.title!] = value
@@ -591,19 +591,19 @@ export function useCopyPaste({
                     ) {
                       await Promise.all([
                         result.unlink.length &&
-                          $api.dbDataTableRow.nestedLink(
-                            meta.value?.id as string,
-                            columnObj.id as string,
-                            encodeURIComponent(pasteRowPk),
-                            result.unlink,
-                          ),
+                        $api.dbDataTableRow.nestedLink(
+                          meta.value?.id as string,
+                          columnObj.id as string,
+                          encodeURIComponent(pasteRowPk),
+                          result.unlink,
+                        ),
                         result.link.length &&
-                          $api.dbDataTableRow.nestedUnlink(
-                            meta.value?.id as string,
-                            columnObj.id as string,
-                            encodeURIComponent(pasteRowPk),
-                            result.link,
-                          ),
+                        $api.dbDataTableRow.nestedUnlink(
+                          meta.value?.id as string,
+                          columnObj.id as string,
+                          encodeURIComponent(pasteRowPk),
+                          result.link,
+                        ),
                       ])
 
                       rowObj.row[columnObj.title!] = value

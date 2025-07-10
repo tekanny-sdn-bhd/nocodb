@@ -48,7 +48,7 @@ const syncSource = ref({
   type: 'Airtable',
   details: {
     syncInterval: '15mins',
-    syncDirection: 'Airtable to NocoDB',
+    syncDirection: 'Airtable to NexTable',
     syncRetryCount: 1,
     apiKey: '',
     appId: '',
@@ -151,9 +151,9 @@ async function listenForUpdates(id?: string) {
   const job = id
     ? { id }
     : jobs
-        // sort by created_at desc (latest first)
-        .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-        .find((j) => j.base_id === baseId && j.status !== JobStatus.COMPLETED && j.status !== JobStatus.FAILED)
+      // sort by created_at desc (latest first)
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+      .find((j) => j.base_id === baseId && j.status !== JobStatus.COMPLETED && j.status !== JobStatus.FAILED)
 
   if (!job) {
     listeningForUpdates.value = false
@@ -209,7 +209,7 @@ async function loadSyncSrc() {
       type: 'Airtable',
       details: {
         syncInterval: '15mins',
-        syncDirection: 'Airtable to NocoDB',
+        syncDirection: 'Airtable to NexTable',
         syncRetryCount: 1,
         apiKey: '',
         appId: '',
@@ -288,19 +288,9 @@ const collapseKey = ref('')
 </script>
 
 <template>
-  <a-modal
-    v-model:visible="dialogShow"
-    class="!top-[25vh]"
-    :class="{ active: dialogShow }"
-    :closable="false"
-    :transition-name="transition"
-    :keyboard="step !== 2"
-    :mask-closable="step !== 2"
-    width="448px"
-    wrap-class-name="nc-modal-airtable-import"
-    hide
-    @keydown.esc="dialogShow = false"
-  >
+  <a-modal v-model:visible="dialogShow" class="!top-[25vh]" :class="{ active: dialogShow }" :closable="false"
+    :transition-name="transition" :keyboard="step !== 2" :mask-closable="step !== 2" width="448px"
+    wrap-class-name="nc-modal-airtable-import" hide @keydown.esc="dialogShow = false">
     <div class="text-base font-weight-bold flex items-center gap-4 mb-6" @dblclick="enableAbort = true">
       <GeneralIcon icon="airtable" class="w-6 h-6" />
 
@@ -311,12 +301,8 @@ const collapseKey = ref('')
       <span v-else class="flex-1"> {{ $t('labels.airtableBaseImported') }} </span>
 
       <template v-if="step === 1">
-        <a
-          href="https://docs.nocodb.com/bases/import-base-from-airtable#get-airtable-credentials"
-          class="!text-nc-content-gray-subtle2 text-sm font-weight-500 ml-auto"
-          target="_blank"
-          rel="noopener"
-        >
+        <a href="https://docs.nocodb.com/bases/import-base-from-airtable#get-airtable-credentials"
+          class="!text-nc-content-gray-subtle2 text-sm font-weight-500 ml-auto" target="_blank" rel="noopener">
           Docs
         </a>
       </template>
@@ -324,7 +310,8 @@ const collapseKey = ref('')
       <div v-else-if="step === 2" class="flex items-center gap-2">
         <nc-button type="text" size="xs" class="ml-auto" @click="detailsIsShown = !detailsIsShown">
           {{ detailsIsShown ? 'Hide' : 'Show' }} Details
-          <GeneralIcon icon="chevronDown" class="ml-2 transition-all transform" :class="{ 'rotate-180': detailsIsShown }" />
+          <GeneralIcon icon="chevronDown" class="ml-2 transition-all transform"
+            :class="{ 'rotate-180': detailsIsShown }" />
         </nc-button>
         <NcButton v-if="!isInProgress" icon-only type="text" size="xs" @click.stop="dialogShow = false">
           <template #icon>
@@ -335,31 +322,20 @@ const collapseKey = ref('')
     </div>
 
     <div v-if="step === 1">
-      <a-form
-        ref="form"
-        :model="syncSource"
-        name="quick-import-airtable-form"
-        layout="vertical"
-        class="m-0 !text-nc-content-gray"
-      >
+      <a-form ref="form" :model="syncSource" name="quick-import-airtable-form" layout="vertical"
+        class="m-0 !text-nc-content-gray">
         <a-form-item v-bind="validateInfos['details.apiKey']" class="!my-5">
           <div class="flex items-end">
             <label class="text-nc-content-gray text-sm"> {{ $t('labels.personalAccessToken') }} </label>
-            <a
-              href="https://docs.nocodb.com/bases/import-base-from-airtable#get-airtable-credentials"
-              class="!text-brand text-sm ml-auto"
-              target="_blank"
-              rel="noopener"
-            >
+            <a href="https://docs.nocodb.com/bases/import-base-from-airtable#get-airtable-credentials"
+              class="!text-brand text-sm ml-auto" target="_blank" rel="noopener">
               {{ $t('labels.whereToFind') }}
             </a>
           </div>
 
-          <a-input-password
-            v-model:value="syncSource.details.apiKey"
+          <a-input-password v-model:value="syncSource.details.apiKey"
             placeholder="Enter your Airtable Personal Access Token"
-            class="!rounded-lg mt-2 nc-input-api-key nc-input-shadow !text-nc-content-gray"
-          >
+            class="!rounded-lg mt-2 nc-input-api-key nc-input-shadow !text-nc-content-gray">
             <template #iconRender="isVisible">
               <GeneralIcon :icon="!isVisible ? 'ncEye' : 'ncEyeOff'" />
             </template>
@@ -368,26 +344,22 @@ const collapseKey = ref('')
 
         <a-form-item v-bind="validateInfos['details.syncSourceUrlOrId']" class="!my-5">
           <label class="text-nc-content-gray text-sm"> {{ `${$t('labels.sharedBase')} ID/URL` }} </label>
-          <a-input
-            v-model:value="syncSource.details.syncSourceUrlOrId"
+          <a-input v-model:value="syncSource.details.syncSourceUrlOrId"
             placeholder="Paste the Base URL or Base ID from Airtable"
-            class="!rounded-lg !mt-2 nc-input-shared-base nc-input-shadow !text-nc-content-gray"
-          />
+            class="!rounded-lg !mt-2 nc-input-shared-base nc-input-shadow !text-nc-content-gray" />
         </a-form-item>
 
         <nc-button type="text" size="small" @click="collapseKey = !collapseKey ? 'advanced-settings' : ''">
           {{ $t('title.advancedSettings') }}
-          <GeneralIcon
-            icon="chevronDown"
-            class="ml-2 !transition-all !transform"
-            :class="{ '!rotate-180': collapseKey === 'advanced-settings' }"
-          />
+          <GeneralIcon icon="chevronDown" class="ml-2 !transition-all !transform"
+            :class="{ '!rotate-180': collapseKey === 'advanced-settings' }" />
         </nc-button>
 
         <a-collapse v-model:active-key="collapseKey" ghost class="nc-import-collapse">
           <a-collapse-panel key="advanced-settings">
             <div class="mb-2">
-              <NcCheckbox v-model:checked="syncSource.details.options.syncData">{{ $t('labels.importData') }}</NcCheckbox>
+              <NcCheckbox v-model:checked="syncSource.details.options.syncData">{{ $t('labels.importData') }}
+              </NcCheckbox>
             </div>
 
             <div class="my-2">
@@ -434,16 +406,10 @@ const collapseKey = ref('')
           </span>
         </template>
         <template v-else-if="lastProgress?.status === JobStatus.FAILED">
-          <NcAlert
-            align="center"
-            type="error"
-            show-icon
-            message-class="!text-sm"
-            description-class="!text-small !leading-[18px]"
-            :copy-text="lastProgress?.msg"
+          <NcAlert align="center" type="error" show-icon message-class="!text-sm"
+            description-class="!text-small !leading-[18px]" :copy-text="lastProgress?.msg"
             :message="$t('msg.error.importError')"
-            :description="$t('msg.error.anErrorOccuredWhileAirtableBaseImport')"
-          />
+            :description="$t('msg.error.anErrorOccuredWhileAirtableBaseImport')" />
         </template>
         <div v-else class="flex items-center gap-3">
           <GeneralIcon icon="checkFill" class="text-white w-4 h-4" />
@@ -452,39 +418,27 @@ const collapseKey = ref('')
       </div>
 
       <div v-if="!isInProgress" class="text-right mt-5">
-        <nc-button v-if="lastProgress?.status === JobStatus.FAILED" size="small" @click="step = 1"> Retry import </nc-button>
+        <nc-button v-if="lastProgress?.status === JobStatus.FAILED" size="small" @click="step = 1"> Retry import
+        </nc-button>
         <nc-button v-else size="small" @click="dialogShow = false"> Go to base </nc-button>
       </div>
     </div>
 
     <template #footer>
       <div v-if="step === 1" class="flex justify-between mt-5">
-        <nc-button
-          key="back"
-          type="text"
-          size="small"
-          @click="
-            () => {
-              dialogShow = false
-              emit('back')
-            }
-          "
-        >
+        <nc-button key="back" type="text" size="small" @click="
+          () => {
+            dialogShow = false
+            emit('back')
+          }
+        ">
           <GeneralIcon v-if="showBackBtn" icon="chevronLeft" class="mr-1" />
 
           {{ showBackBtn ? $t('general.back') : $t('general.cancel') }}
         </nc-button>
 
-        <nc-button
-          key="submit"
-          v-e="['c:sync-airtable:save-and-sync']"
-          type="primary"
-          class="nc-btn-airtable-import"
-          size="small"
-          :loading="isLoading"
-          :disabled="disableImportButton"
-          @click="saveAndSync"
-        >
+        <nc-button key="submit" v-e="['c:sync-airtable:save-and-sync']" type="primary" class="nc-btn-airtable-import"
+          size="small" :loading="isLoading" :disabled="disableImportButton" @click="saveAndSync">
           {{ $t('activity.import') }} Base
         </nc-button>
       </div>
@@ -496,6 +450,7 @@ const collapseKey = ref('')
 .nc-import-collapse :deep(.ant-collapse-header) {
   display: none !important;
 }
+
 .nc-import-collapse :deep(.ant-collapse-content-box) {
   @apply !pb-0 !pt-2;
 }
@@ -509,6 +464,7 @@ const collapseKey = ref('')
 .nc-input-api-key,
 .nc-input-shared-base {
   @apply !text-nc-content-gray;
+
   input {
     @apply !text-nc-content-gray;
   }
@@ -519,6 +475,7 @@ const collapseKey = ref('')
 .nc-modal-airtable-import .ant-modal-footer {
   @apply !border-none p-0;
 }
+
 .nc-modal-airtable-import .ant-collapse-content-box {
   padding-left: 6px;
 }

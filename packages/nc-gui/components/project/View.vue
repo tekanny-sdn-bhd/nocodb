@@ -133,7 +133,7 @@ watch(
   () => {
     if (activeTable.value?.title) return
 
-    useTitle(`${currentBase.value?.title ?? activeWorkspace.value?.title ?? 'NocoDB'}`)
+    useTitle(`${currentBase.value?.title ?? activeWorkspace.value?.title ?? 'NexTable'}`)
   },
   {
     immediate: true,
@@ -142,12 +142,7 @@ watch(
 
 watch(
   () => currentBase.value?.id,
-  () => {
-    /**
-     * When the current base ID changes, reset the integrations array.
-     * This ensures that the integration data is cleared, allowing it to be reloaded
-     * properly when opening the create/edit source modal with the updated base.
-     */
+  () =>       /*       * When the current base ID changes, reset the integrations array       * This ensures that the integration data is cleared, allowing it to be reloade       * properly when opening the create/edit source modal with the updated base       */
     integrations.value = []
   },
 )
@@ -166,11 +161,8 @@ onMounted(() => {
 
 <template>
   <div class="h-full nc-base-view">
-    <div
-      v-if="!isAdminPanel"
-      class="flex flex-row px-2 py-2 gap-3 justify-between w-full border-b-1 border-gray-200"
-      :class="{ 'nc-table-toolbar-mobile': isMobileMode, 'h-[var(--topbar-height)]': !isMobileMode }"
-    >
+    <div v-if="!isAdminPanel" class="flex flex-row px-2 py-2 gap-3 justify-between w-full border-b-1 border-gray-200"
+      :class="{ 'nc-table-toolbar-mobile': isMobileMode, 'h-[var(--topbar-height)]': !isMobileMode }">
       <div class="flex-1 flex flex-row items-center gap-x-3">
         <GeneralOpenLeftSidebarBtn />
         <div class="flex flex-row items-center h-full gap-x-2 px-2">
@@ -181,13 +173,8 @@ onMounted(() => {
               {{ currentBase?.title }}
             </span>
           </NcTooltip>
-          <NcBadge
-            v-if="isPrivateBase"
-            size="xs"
-            class="!text-bodySm !bg-nc-bg-gray-medium !text-nc-content-gray-subtle2"
-            color="grey"
-            :border="false"
-          >
+          <NcBadge v-if="isPrivateBase" size="xs"
+            class="!text-bodySm !bg-nc-bg-gray-medium !text-nc-content-gray-subtle2" color="grey" :border="false">
             <GeneralIcon icon="ncLock" class="w-3.5 h-3.5 mr-1" />
             {{ $t('general.private') }}
           </NcBadge>
@@ -198,12 +185,9 @@ onMounted(() => {
 
       <LazyGeneralShareProject />
     </div>
-    <div
-      class="flex nc-base-view-tab"
-      :style="{
-        height: 'calc(100% - var(--topbar-height))',
-      }"
-    >
+    <div class="flex nc-base-view-tab" :style="{
+      height: 'calc(100% - var(--topbar-height))',
+    }">
       <a-tabs v-model:active-key="projectPageTab" class="w-full">
         <template #leftExtra>
           <div class="w-3"></div>
@@ -225,24 +209,18 @@ onMounted(() => {
             <div class="tab-title" data-testid="proj-view-tab__access-settings">
               <GeneralIcon icon="users" />
               <div>{{ $t('labels.members') }}</div>
-              <div
-                v-if="userCount"
-                class="tab-info"
-                :class="{
-                  'bg-primary-selected': projectPageTab === 'collaborator',
-                  'bg-gray-50': projectPageTab !== 'collaborator',
-                }"
-              >
+              <div v-if="userCount" class="tab-info" :class="{
+                'bg-primary-selected': projectPageTab === 'collaborator',
+                'bg-gray-50': projectPageTab !== 'collaborator',
+              }">
                 {{ userCount }}
               </div>
             </div>
           </template>
           <ProjectAccessSettings :base-id="currentBase?.id" />
         </a-tab-pane>
-        <a-tab-pane
-          v-if="isEeUI && isUIAllowed('sourceCreate') && base.id && isTableAndFieldPermissionsEnabled"
-          key="permissions"
-        >
+        <a-tab-pane v-if="isEeUI && isUIAllowed('sourceCreate') && base.id && isTableAndFieldPermissionsEnabled"
+          key="permissions">
           <template #tab>
             <div class="tab-title" data-testid="proj-view-tab__permissions">
               <GeneralIcon icon="ncLock" />
@@ -256,14 +234,10 @@ onMounted(() => {
             <div class="tab-title" data-testid="proj-view-tab__data-sources">
               <GeneralIcon icon="ncDatabase" />
               <div>{{ $t('labels.dataSources') }}</div>
-              <div
-                v-if="base.sources?.length"
-                class="tab-info"
-                :class="{
-                  'bg-primary-selected': projectPageTab === 'data-source',
-                  'bg-gray-50': projectPageTab !== 'data-source',
-                }"
-              >
+              <div v-if="base.sources?.length" class="tab-info" :class="{
+                'bg-primary-selected': projectPageTab === 'data-source',
+                'bg-gray-50': projectPageTab !== 'data-source',
+              }">
                 {{ base.sources.length }}
               </div>
             </div>
@@ -281,8 +255,7 @@ onMounted(() => {
         </a-tab-pane>
         <a-tab-pane
           v-if="!isSharedBase && (isUIAllowed('baseMiscSettings') || isFeatureEnabled(FEATURE_FLAG.MODEL_CONTEXT_PROTOCOL))"
-          key="base-settings"
-        >
+          key="base-settings">
           <template #tab>
             <div class="tab-title" data-testid="proj-view-tab__base-settings">
               <GeneralIcon icon="ncSettings" />
@@ -300,6 +273,7 @@ onMounted(() => {
 :deep(.ant-tabs-content) {
   @apply !h-full;
 }
+
 :deep(.ant-tabs-nav) {
   @apply !mb-0;
 }
@@ -307,17 +281,21 @@ onMounted(() => {
 .tab-title {
   @apply flex flex-row items-center gap-x-2 px-2 py-[1px];
 }
+
 :deep(.ant-tabs-tab) {
   @apply pt-2 pb-3;
 }
+
 :deep(.ant-tabs-content) {
   &:not(:has(.nc-project-overview-tab-content)) {
     @apply nc-content-max-w;
   }
 }
+
 :deep(.ant-tabs-tab .tab-title) {
   @apply text-gray-500;
 }
+
 :deep(.ant-tabs-tab-active .tab-title) {
   @apply text-primary;
 }

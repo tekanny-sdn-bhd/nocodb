@@ -205,40 +205,26 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <a-modal
-    v-model:visible="dialogShow"
-    class="!top-[25vh]"
-    :class="{ active: dialogShow }"
-    :closable="false"
-    :transition-name="transition"
-    :keyboard="step !== 2"
-    :mask-closable="step !== 2"
-    width="448px"
-    wrap-class-name="nc-modal-nocodb-import"
-    hide
-    @keydown.esc="dialogShow = false"
-  >
+  <a-modal v-model:visible="dialogShow" class="!top-[25vh]" :class="{ active: dialogShow }" :closable="false"
+    :transition-name="transition" :keyboard="step !== 2" :mask-closable="step !== 2" width="448px"
+    wrap-class-name="nc-modal-nocodb-import" hide @keydown.esc="dialogShow = false">
     <div class="text-base font-weight-bold flex items-center gap-4 mb-6">
       <GeneralIcon icon="nocodb1" class="w-6 h-6" @dblclick="advancedOptionsCounter++" />
 
       <span v-if="step === 1">
-        {{ $t('title.quickImportNocoDB') }}
+        {{ $t('title.quickImportNexTable') }}
       </span>
-      <span v-else-if="isInProgress"> {{ `${$t('labels.importingFromNocoDB')}...` }} </span>
+      <span v-else-if="isInProgress"> {{ `${$t('labels.importingFromNexTable')}...` }} </span>
       <span v-else> {{ $t('labels.nocoDBBaseImported') }} </span>
 
-      <a
-        v-if="step === 1"
-        href="https://docs.nocodb.com/bases/import-base-from-nocodb#get-nocodb-credentials"
-        class="!text-gray-500 prose-sm ml-auto"
-        target="_blank"
-        rel="noopener"
-      >
+      <a v-if="step === 1" href="https://docs.nocodb.com/bases/import-base-from-nocodb#get-nocodb-credentials"
+        class="!text-gray-500 prose-sm ml-auto" target="_blank" rel="noopener">
         Docs
       </a>
       <NcButton v-else-if="step === 2" type="text" size="xs" class="ml-auto" @click="detailsIsShown = !detailsIsShown">
         {{ detailsIsShown ? 'Hide' : 'Show' }} Details
-        <GeneralIcon icon="chevronDown" class="ml-2 transition-all transform" :class="{ 'rotate-180': detailsIsShown }" />
+        <GeneralIcon icon="chevronDown" class="ml-2 transition-all transform"
+          :class="{ 'rotate-180': detailsIsShown }" />
       </NcButton>
     </div>
 
@@ -246,7 +232,7 @@ onUnmounted(() => {
       <div class="text-gray-600 text-sm px-2">
         <p class="mb-2">Easily migrate your base with the following steps:</p>
         <ol class="list-decimal list-inside mt-2 pl-1">
-          <li>Open <strong>settings</strong> in your NocoDB base</li>
+          <li>Open <strong>settings</strong> in your NexTable base</li>
           <li>Navigate to <strong>Migrate</strong> tab</li>
           <li>Paste the <strong>URL</strong></li>
           <li>Click <strong>Migrate</strong></li>
@@ -258,19 +244,11 @@ onUnmounted(() => {
           <LazyGeneralCopyInput :model-value="migrationUrl" class="!rounded-lg !mt-2 nc-input-shared-base" />
         </a-form-item>
 
-        <NcButton
-          v-if="advancedOptionsEnabled && !listeningImport"
-          class="!mt-2"
-          type="text"
-          size="small"
-          @click="collapseKey = !collapseKey ? 'advanced-settings' : ''"
-        >
+        <NcButton v-if="advancedOptionsEnabled && !listeningImport" class="!mt-2" type="text" size="small"
+          @click="collapseKey = !collapseKey ? 'advanced-settings' : ''">
           {{ $t('title.advancedSettings') }}
-          <GeneralIcon
-            icon="chevronDown"
-            class="ml-2 !transition-all !transform"
-            :class="{ '!rotate-180': collapseKey === 'advanced-settings' }"
-          />
+          <GeneralIcon icon="chevronDown" class="ml-2 !transition-all !transform"
+            :class="{ '!rotate-180': collapseKey === 'advanced-settings' }" />
         </NcButton>
 
         <a-collapse v-if="!listeningImport" v-model:active-key="collapseKey" ghost class="nc-import-collapse">
@@ -327,7 +305,8 @@ onUnmounted(() => {
       </div>
 
       <div v-if="!isInProgress" class="text-right mt-4">
-        <NcButton v-if="lastProgress?.status === JobStatus.FAILED" size="small" @click="retryImport"> Retry import </NcButton>
+        <NcButton v-if="lastProgress?.status === JobStatus.FAILED" size="small" @click="retryImport"> Retry import
+        </NcButton>
         <NcButton v-else size="small" @click="dialogShow = false">
           {{ syncOptions.workspaceMode || syncOptions.newBase ? 'Go To Dashboard' : 'Go To Base' }}
         </NcButton>
@@ -336,18 +315,12 @@ onUnmounted(() => {
 
     <template #footer>
       <div v-if="step === 1" class="flex justify-between mt-2">
-        <NcButton
-          v-if="!listeningImport"
-          key="back"
-          type="text"
-          size="small"
-          @click="
-            () => {
-              dialogShow = false
-              emit('back')
-            }
-          "
-        >
+        <NcButton v-if="!listeningImport" key="back" type="text" size="small" @click="
+          () => {
+            dialogShow = false
+            emit('back')
+          }
+        ">
           <GeneralIcon v-if="showBackBtn" icon="chevronLeft" class="mr-1" />
 
           {{ showBackBtn ? $t('general.back') : $t('general.cancel') }}
@@ -356,14 +329,8 @@ onUnmounted(() => {
           {{ $t('general.abort') }}
         </NcButton>
 
-        <NcButton
-          v-if="listeningImport"
-          type="ghost"
-          class="nc-btn-nocodb-import"
-          size="small"
-          :loading="listeningImport"
-          @click="startListening"
-        >
+        <NcButton v-if="listeningImport" type="ghost" class="nc-btn-nocodb-import" size="small"
+          :loading="listeningImport" @click="startListening">
           Listening
         </NcButton>
         <NcButton v-else type="primary" class="nc-btn-nocodb-import" size="small" @click="startListening">
@@ -384,6 +351,7 @@ onUnmounted(() => {
 .nc-modal-nocodb-import .ant-modal-footer {
   @apply !border-none p-0;
 }
+
 .nc-modal-nocodb-import .ant-collapse-content-box {
   padding-left: 6px;
 }

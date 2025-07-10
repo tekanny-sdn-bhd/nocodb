@@ -39,20 +39,16 @@ hooks.hook('page:finish', () => {
 
     <a-layout class="!flex-col h-screen">
       <a-layout-header v-if="!route.meta.public && signedIn && !route.meta.hideHeader" class="nc-navbar">
-        <div
-          v-if="!route.params.baseType"
-          v-e="['c:navbar:home']"
-          data-testid="nc-noco-brand-icon"
+        <div v-if="!route.params.baseType" v-e="['c:navbar:home']" data-testid="nc-noco-brand-icon"
           class="transition-all duration-200 p-2 cursor-pointer transform hover:scale-105 nc-noco-brand-icon"
-          @click="navigateTo('/')"
-        >
+          @click="navigateTo('/')">
           <a-tooltip placement="bottom">
             <template #title>
               {{ currentVersion }}
             </template>
             <div class="flex items-center gap-2">
-              <img v-if="!isDashboard" width="120" alt="NocoDB" src="~/assets/img/brand/nocodb-full.png" />
-              <img v-else width="25" alt="NocoDB" src="~/assets/img/icons/256x256.png" />
+              <img v-if="!isDashboard" width="120" alt="NexTable" src="~/assets/img/brand/nocodb-full.png" />
+              <img v-else width="25" alt="NexTable" src="~/assets/img/icons/256x256.png" />
             </div>
           </a-tooltip>
         </div>
@@ -79,17 +75,14 @@ hooks.hook('page:finish', () => {
 
         <template v-if="signedIn">
           <a-dropdown :trigger="['click']" overlay-class-name="nc-dropdown-user-accounts-menu">
-            <component
-              :is="iconMap.threeDotVertical"
-              data-testid="nc-menu-accounts"
-              class="md:text-xl cursor-pointer hover:text-accent nc-menu-accounts"
-              @click.prevent
-            />
+            <component :is="iconMap.threeDotVertical" data-testid="nc-menu-accounts"
+              class="md:text-xl cursor-pointer hover:text-accent nc-menu-accounts" @click.prevent />
 
             <template #overlay>
               <a-menu class="!py-0 leading-8 !rounded">
                 <a-menu-item key="0" data-testid="nc-menu-accounts__user-settings" class="!rounded-t">
-                  <nuxt-link v-e="['c:navbar:user:email']" class="nc-base-menu-item group !no-underline" to="/account/users">
+                  <nuxt-link v-e="['c:navbar:user:email']" class="nc-base-menu-item group !no-underline"
+                    to="/account/users">
                     <component :is="iconMap.accountCircle" class="mt-1 group-hover:text-accent" />&nbsp;
                     <div class="prose group-hover:text-primary">
                       <div>Account</div>
@@ -163,7 +156,7 @@ hooks.hook('page:finish', () => {
   @apply flex !bg-white items-center !pl-2 !pr-5;
 }
 
-.nc-layout-base-inner > div {
+.nc-layout-base-inner>div {
   @apply h-full;
 }
 </style>
