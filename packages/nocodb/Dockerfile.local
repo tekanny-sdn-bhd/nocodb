@@ -54,6 +54,7 @@ RUN apk add --update --no-cache \
 # Copy production code & main entry file
 COPY --link --from=builder /usr/src/app/ /usr/src/app/
 COPY --link --from=builder /usr/src/appEntry/ /usr/src/appEntry/
+COPY --link ./docker/nc-gui/ ./node_modules/nc-lib-gui/lib/dist/
 
 EXPOSE 8080
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]

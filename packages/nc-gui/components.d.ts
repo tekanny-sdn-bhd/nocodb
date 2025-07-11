@@ -74,7 +74,6 @@ declare module 'vue' {
     ClaritySuccessLine: typeof import('~icons/clarity/success-line')['default']
     IcRoundEdit: typeof import('~icons/ic/round-edit')['default']
     LogosGoogleGmail: typeof import('~icons/logos/google-gmail')['default']
-    MaterialSymbolsChevronRightRounded: typeof import('~icons/material-symbols/chevron-right-rounded')['default']
     MaterialSymbolsCloseRounded: typeof import('~icons/material-symbols/close-rounded')['default']
     MaterialSymbolsDeleteOutlineRounded: typeof import('~icons/material-symbols/delete-outline-rounded')['default']
     MaterialSymbolsFileCopyOutline: typeof import('~icons/material-symbols/file-copy-outline')['default']
