@@ -142,7 +142,7 @@ watch(
 
 watch(
   () => currentBase.value?.id,
-  () =>       /*       * When the current base ID changes, reset the integrations array       * This ensures that the integration data is cleared, allowing it to be reloade       * properly when opening the create/edit source modal with the updated base       */
+  () => {      /*       * When the current base ID changes, reset the integrations array       * This ensures that the integration data is cleared, allowing it to be reloade       * properly when opening the create/edit source modal with the updated base       */
     integrations.value = []
   },
 )
