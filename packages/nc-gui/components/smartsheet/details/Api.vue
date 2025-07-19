@@ -44,11 +44,11 @@ const langs = [
     clients: ['axios', 'fetch', 'native'],
     icon: iconMap.langNode,
   },
-  {
+  /* {
     name: 'NocoDB-SDK',
     clients: ['javascript', 'node'],
     icon: iconMap.langNocodbSdk,
-  },
+  }, */
   {
     name: 'php',
     icon: iconMap.langPhp,
@@ -216,7 +216,7 @@ const supportedDocs = [
           </div>
         </NcMenuItem>
 
-        <NcDivider class="!my-3" />
+        <!-- <NcDivider class="!my-3" />
 
         <div class="flex flex-col gap-1">
           <div
@@ -240,7 +240,7 @@ const supportedDocs = [
               {{ doc.title }}
             </a>
           </div>
-        </div>
+        </div> -->
       </NcMenu>
       <div class="w-[calc(100%_-_264px)] flex flex-col gap-6 h-full max-h-full">
         <div class="nc-api-clents-tab-wrapper h-[calc(100%_-_56px)] flex flex-col mt-2">

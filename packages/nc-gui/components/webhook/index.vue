@@ -1320,7 +1320,7 @@ const webhookV2AndV3Diff = computed(() => {
           </div>
         </div>
 
-        <div class="h-full bg-gray-50 border-l-1 w-80 p-5 rounded-br-2xl border-gray-200">
+        <!-- <div class="h-full bg-gray-50 border-l-1 w-80 p-5 rounded-br-2xl border-gray-200">
           <div class="w-full flex flex-col gap-3">
             <h2 class="text-sm text-gray-700 font-semibold !my-0">{{ $t('labels.supportDocs') }}</h2>
             <div>
@@ -1335,7 +1335,7 @@ const webhookV2AndV3Diff = computed(() => {
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </template>
     </div>
     <div v-else-if="activeTab === HookTab.Log" class="h-[calc(100%_-_57px)]">

@@ -289,7 +289,7 @@ const getHookTypeText = (hook: HookType) => {
                 <GeneralIcon icon="search" class="mr-2 h-4 w-4 text-gray-500" />
               </template>
             </a-input>
-            <NcButton
+            <!-- <NcButton
               class="px-2"
               type="text"
               size="small"
@@ -300,7 +300,7 @@ const getHookTypeText = (hook: HookType) => {
 
                 <GeneralIcon icon="externalLink" />
               </div>
-            </NcButton>
+            </NcButton> -->
           </div>
 
           <NcButton

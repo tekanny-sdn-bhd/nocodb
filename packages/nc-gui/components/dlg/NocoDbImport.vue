@@ -217,10 +217,11 @@ onUnmounted(() => {
       <span v-else-if="isInProgress"> {{ `${$t('labels.importingFromNexTable')}...` }} </span>
       <span v-else> {{ $t('labels.nocoDBBaseImported') }} </span>
 
-      <a v-if="step === 1" href="https://docs.nocodb.com/bases/import-base-from-nocodb#get-nocodb-credentials"
+      <div v-if="step === 1"></div>
+      <!-- <a v-if="step === 1" href="https://docs.nocodb.com/bases/import-base-from-nocodb#get-nocodb-credentials"
         class="!text-gray-500 prose-sm ml-auto" target="_blank" rel="noopener">
         Docs
-      </a>
+      </a> -->
       <NcButton v-else-if="step === 2" type="text" size="xs" class="ml-auto" @click="detailsIsShown = !detailsIsShown">
         {{ detailsIsShown ? 'Hide' : 'Show' }} Details
         <GeneralIcon icon="chevronDown" class="ml-2 transition-all transform"

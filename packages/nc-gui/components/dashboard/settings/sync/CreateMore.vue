@@ -266,10 +266,10 @@ const filterIntegration = (i: IntegrationItemType) => !!(i.sub_type !== SyncData
             </div>
           </general-overlay>
         </div>
-        <div class="nc-add-source-right-panel">
+        <!-- <div class="nc-add-source-right-panel">
           <DashboardSettingsDataSourcesSupportedDocs />
           <NcDivider />
-        </div>
+        </div> -->
       </div>
     </div>
   </NcModal>

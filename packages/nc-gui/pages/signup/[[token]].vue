@@ -119,9 +119,9 @@ onMounted(async () => {
     <NuxtLayout>
       <div class="md:bg-primary bg-opacity-5 signup h-full min-h-[600px] flex flex-col justify-center items-center">
         <div
-          class="bg-white mt-[60px] relative flex flex-col justify-center gap-2 w-full max-w-[500px] mx-auto p-8 md:(rounded-lg border-1 border-gray-200 shadow-xl)"
-        >
-          <LazyGeneralNocoIcon class="color-transition hover:(ring ring-accent ring-opacity-100)" :animate="isLoading" />
+          class="bg-white mt-[60px] relative flex flex-col justify-center gap-2 w-full max-w-[500px] mx-auto p-8 md:(rounded-lg border-1 border-gray-200 shadow-xl)">
+          <LazyGeneralNocoIcon class="color-transition hover:(ring ring-accent ring-opacity-100)"
+            :animate="isLoading" />
 
           <h1 class="prose-2xl font-bold self-center my-4">
             {{ $t('general.signUp') }}
@@ -136,11 +136,8 @@ onMounted(async () => {
           <a-form ref="formValidator" :model="form" layout="vertical" no-style @finish="signUp">
             <template v-if="!appInfo.disableEmailAuth">
               <Transition name="layout">
-                <div
-                  v-if="error"
-                  class="self-center mb-4 bg-red-500 text-white rounded-lg w-3/4 mx-auto p-1"
-                  data-testid="nc-signup-error"
-                >
+                <div v-if="error" class="self-center mb-4 bg-red-500 text-white rounded-lg w-3/4 mx-auto p-1"
+                  data-testid="nc-signup-error">
                   <div class="flex items-center gap-2 justify-center">
                     <MaterialSymbolsWarning />
                     <div class="break-words">{{ error }}</div>
@@ -149,25 +146,13 @@ onMounted(async () => {
               </Transition>
 
               <a-form-item :label="$t('labels.email')" name="email" :rules="formRules.email">
-                <a-input
-                  v-model:value="form.email"
-                  type="email"
-                  autocomplete="email"
-                  size="large"
-                  :placeholder="$t('msg.info.signUp.workEmail')"
-                  @focus="resetError"
-                />
+                <a-input v-model:value="form.email" type="email" autocomplete="email" size="large"
+                  :placeholder="$t('msg.info.signUp.workEmail')" @focus="resetError" />
               </a-form-item>
 
               <a-form-item :label="$t('labels.password')" name="password" :rules="formRules.password">
-                <a-input-password
-                  v-model:value="form.password"
-                  autocomplete="new-password"
-                  size="large"
-                  class="password"
-                  :placeholder="$t('msg.info.signUp.enterPassword')"
-                  @focus="resetError"
-                />
+                <a-input-password v-model:value="form.password" autocomplete="new-password" size="large"
+                  class="password" :placeholder="$t('msg.info.signUp.enterPassword')" @focus="resetError" />
               </a-form-item>
             </template>
             <div class="self-center flex flex-col flex-wrap gap-4 items-center mt-4">
@@ -180,11 +165,8 @@ onMounted(async () => {
                   </span>
                 </button>
               </template>
-              <a
-                v-if="appInfo.googleAuthEnabled"
-                :href="`${appInfo.ncSiteUrl}/auth/google`"
-                class="scaling-btn bg-opacity-100 after:(!bg-white) !text-primary !no-underline"
-              >
+              <a v-if="appInfo.googleAuthEnabled" :href="`${appInfo.ncSiteUrl}/auth/google`"
+                class="scaling-btn bg-opacity-100 after:(!bg-white) !text-primary !no-underline">
                 <span class="flex items-center gap-2">
                   <LogosGoogleGmail />
 
@@ -192,16 +174,15 @@ onMounted(async () => {
                 </span>
               </a>
 
-              <div
-                v-if="appInfo.oidcAuthEnabled"
-                class="self-center flex flex-col flex-wrap gap-4 items-center mt-4 justify-center"
-              >
+              <div v-if="appInfo.oidcAuthEnabled"
+                class="self-center flex flex-col flex-wrap gap-4 items-center mt-4 justify-center">
                 <a :href="`${appInfo.ncSiteUrl}/auth/oidc`" class="!text-primary !no-underline">
                   <button type="button" class="scaling-btn bg-opacity-100">
                     <span class="flex items-center gap-2">
                       <MdiLogin />
                       <template v-if="!appInfo.disableEmailAuth">
-                        {{ $t('labels.signUpWithProvider', { provider: appInfo.oidcProviderName || 'OpenID Connect' }) }}
+                        {{ $t('labels.signUpWithProvider', { provider: appInfo.oidcProviderName || 'OpenID Connect' })
+                        }}
                       </template>
                       <template v-else>
                         {{ $t('general.signUp') }}
@@ -211,7 +192,7 @@ onMounted(async () => {
                 </a>
               </div>
 
-              <div v-if="!appInfo.disableEmailAuth" class="flex items-center gap-2">
+              <!-- <div v-if="!appInfo.disableEmailAuth" class="flex items-center gap-2">
                 <a-switch
                   v-model:checked="subscribe"
                   size="small"
@@ -224,16 +205,16 @@ onMounted(async () => {
                 {{ $t('msg.info.signUp.alreadyHaveAccount') }}
 
                 <nuxt-link @click="navigateSignIn">{{ $t('general.signIn') }}</nuxt-link>
-              </div>
+              </div> -->
             </div>
           </a-form>
         </div>
 
         <div class="prose-sm mt-4 text-gray-500">
           {{ $t('msg.bySigningUp') }}
-          <a class="prose-sm !text-gray-500 underline" target="_blank" href="https://nocodb.com/policy-nocodb" rel="noopener">
-            {{ $t('title.termsOfService') }}</a
-          >
+          <a class="prose-sm !text-gray-500 underline" target="_blank" href="https://nocodb.com/policy-nocodb"
+            rel="noopener">
+            {{ $t('title.termsOfService') }}</a>
         </div>
       </div>
     </NuxtLayout>
@@ -242,6 +223,7 @@ onMounted(async () => {
 
 <style lang="scss">
 .signup {
+
   .ant-input-affix-wrapper,
   .ant-input {
     @apply !appearance-none my-1 border-1 border-solid border-primary border-opacity-50 rounded;

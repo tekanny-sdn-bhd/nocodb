@@ -106,10 +106,10 @@ onMounted(async () => {
               rel="noopener noreferer"
               @click.stop
             >
-              <div class="flex gap-2 items-center">
+              <!-- <div class="flex gap-2 items-center">
                 Go to docs
                 <GeneralIcon icon="ncExternalLink" />
-              </div>
+              </div> -->
             </NcButton>
             <NcButton v-if="config.configured" size="small" type="text" @click.stop="config.buttonClick">
               <div class="flex gap-2 items-center">

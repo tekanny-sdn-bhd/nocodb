@@ -82,14 +82,12 @@ function navigateForgotPassword() {
 <template>
   <div>
     <NuxtLayout>
-      <div
-        data-testid="nc-form-signin"
-        class="md:bg-primary bg-opacity-5 signin h-full min-h-[600px] flex flex-col justify-center items-center nc-form-signin"
-      >
+      <div data-testid="nc-form-signin"
+        class="md:bg-primary bg-opacity-5 signin h-full min-h-[600px] flex flex-col justify-center items-center nc-form-signin">
         <div
-          class="bg-white mt-[60px] relative flex flex-col justify-center gap-2 w-full max-w-[500px] mx-auto p-8 md:(rounded-lg border-1 border-gray-200 shadow-xl)"
-        >
-          <LazyGeneralNocoIcon class="color-transition hover:(ring ring-accent ring-opacity-100)" :animate="isLoading" />
+          class="bg-white mt-[60px] relative flex flex-col justify-center gap-2 w-full max-w-[500px] mx-auto p-8 md:(rounded-lg border-1 border-gray-200 shadow-xl)">
+          <LazyGeneralNocoIcon class="color-transition hover:(ring ring-accent ring-opacity-100)"
+            :animate="isLoading" />
 
           <h1 class="prose-2xl font-bold self-center my-4">{{ $t('general.signIn') }}</h1>
 
@@ -105,27 +103,15 @@ function navigateForgotPassword() {
               </Transition>
 
               <a-form-item :label="$t('labels.email')" name="email" :rules="formRules.email">
-                <a-input
-                  v-model:value="form.email"
-                  type="email"
-                  autocomplete="email"
-                  data-testid="nc-form-signin__email"
-                  size="large"
-                  :placeholder="$t('msg.info.signUp.workEmail')"
-                  @focus="resetError"
-                />
+                <a-input v-model:value="form.email" type="email" autocomplete="email"
+                  data-testid="nc-form-signin__email" size="large" :placeholder="$t('msg.info.signUp.workEmail')"
+                  @focus="resetError" />
               </a-form-item>
 
               <a-form-item :label="$t('labels.password')" name="password" :rules="formRules.password">
-                <a-input-password
-                  v-model:value="form.password"
-                  autocomplete="current-password"
-                  data-testid="nc-form-signin__password"
-                  size="large"
-                  class="password"
-                  :placeholder="$t('msg.info.signUp.enterPassword')"
-                  @focus="resetError"
-                />
+                <a-input-password v-model:value="form.password" autocomplete="current-password"
+                  data-testid="nc-form-signin__password" size="large" class="password"
+                  :placeholder="$t('msg.info.signUp.enterPassword')" @focus="resetError" />
               </a-form-item>
 
               <div class="hidden md:block text-right">
@@ -144,11 +130,8 @@ function navigateForgotPassword() {
                   </span>
                 </button>
               </template>
-              <a
-                v-if="appInfo.googleAuthEnabled"
-                :href="`${appInfo.ncSiteUrl}/auth/google`"
-                class="scaling-btn bg-opacity-100 after:(!bg-white) !text-primary !no-underline"
-              >
+              <a v-if="appInfo.googleAuthEnabled" :href="`${appInfo.ncSiteUrl}/auth/google`"
+                class="scaling-btn bg-opacity-100 after:(!bg-white) !text-primary !no-underline">
                 <span class="flex items-center gap-2">
                   <LogosGoogleGmail />
 
@@ -156,17 +139,16 @@ function navigateForgotPassword() {
                 </span>
               </a>
 
-              <div
-                v-if="appInfo.oidcAuthEnabled"
-                class="self-center flex flex-col flex-wrap gap-4 items-center mt-4 justify-center"
-              >
+              <div v-if="appInfo.oidcAuthEnabled"
+                class="self-center flex flex-col flex-wrap gap-4 items-center mt-4 justify-center">
                 <a :href="`${appInfo.ncSiteUrl}/auth/oidc`" class="!text-primary !no-underline">
                   <button type="button" class="scaling-btn bg-opacity-100">
                     <span class="flex items-center gap-2">
                       <MdiLogin />
 
                       <template v-if="!appInfo.disableEmailAuth">
-                        {{ $t('labels.signUpWithProvider', { provider: appInfo.oidcProviderName || 'OpenID Connect' }) }}
+                        {{ $t('labels.signUpWithProvider', { provider: appInfo.oidcProviderName || 'OpenID Connect' })
+                        }}
                       </template>
                       <template v-else>
                         {{ $t('general.signIn') }}
@@ -176,10 +158,10 @@ function navigateForgotPassword() {
                 </a>
               </div>
 
-              <div v-if="!appInfo.inviteOnlySignup" class="text-end prose-sm">
+              <!-- <div v-if="!appInfo.inviteOnlySignup" class="text-end prose-sm">
                 {{ $t('msg.info.signUp.dontHaveAccount') }}
                 <nuxt-link @click="navigateSignUp">{{ $t('general.signUp') }}</nuxt-link>
-              </div>
+              </div> -->
               <template v-if="!appInfo.disableEmailAuth">
                 <div class="md:hidden">
                   <nuxt-link class="prose-sm" @click="navigateForgotPassword">
@@ -197,6 +179,7 @@ function navigateForgotPassword() {
 
 <style lang="scss">
 .signin {
+
   .ant-input-affix-wrapper,
   .ant-input {
     @apply !appearance-none my-1 border-1 border-solid border-primary border-opacity-50 rounded;

@@ -301,10 +301,10 @@ const collapseKey = ref('')
       <span v-else class="flex-1"> {{ $t('labels.airtableBaseImported') }} </span>
 
       <template v-if="step === 1">
-        <a href="https://docs.nocodb.com/bases/import-base-from-airtable#get-airtable-credentials"
+        <!-- <a href="https://docs.nocodb.com/bases/import-base-from-airtable#get-airtable-credentials"
           class="!text-nc-content-gray-subtle2 text-sm font-weight-500 ml-auto" target="_blank" rel="noopener">
           Docs
-        </a>
+        </a> -->
       </template>
 
       <div v-else-if="step === 2" class="flex items-center gap-2">
@@ -327,10 +327,10 @@ const collapseKey = ref('')
         <a-form-item v-bind="validateInfos['details.apiKey']" class="!my-5">
           <div class="flex items-end">
             <label class="text-nc-content-gray text-sm"> {{ $t('labels.personalAccessToken') }} </label>
-            <a href="https://docs.nocodb.com/bases/import-base-from-airtable#get-airtable-credentials"
+            <!-- <a href="https://docs.nocodb.com/bases/import-base-from-airtable#get-airtable-credentials"
               class="!text-brand text-sm ml-auto" target="_blank" rel="noopener">
               {{ $t('labels.whereToFind') }}
-            </a>
+            </a> -->
           </div>
 
           <a-input-password v-model:value="syncSource.details.apiKey"
