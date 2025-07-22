@@ -260,7 +260,7 @@ const hasTableCreatePermission = computed(() => {
         <div v-if="isSharedBase" class="flex-1">
           <div data-testid="nc-workspace-menu"
             class="flex items-center nc-workspace-menu overflow-hidden py-1.25 pr-0.25 justify-center w-full">
-            <a class="w-24 min-w-10 transition-all duration-200 p-1 transform" href="https://github.com/nocodb/nocodb"
+            <a class="w-24 min-w-10 transition-all duration-200 p-1 transform"
               target="_blank" rel="noopener noreferrer">
               <img alt="NexTable" src="~/assets/img/brand/nocodb.png" />
             </a>

@@ -54,7 +54,7 @@ onMounted(async () => await fetchReleaseInfo())
             no-prefetch
             no-rel
             class="!text-primary !no-underline"
-            to="https://github.com/nocodb/nocodb/releases"
+            to="/"
             target="_blank"
           >
             <div class="nc-menu-item">

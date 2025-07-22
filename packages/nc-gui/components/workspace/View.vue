@@ -174,7 +174,7 @@ onBeforeUnmount(() => {
       <template #leftExtra>
         <div class="w-3"></div>
       </template>
-      <template v-if="isUIAllowed('workspaceCollaborators')">
+      <!-- <template v-if="isUIAllowed('workspaceCollaborators')">
         <a-tab-pane key="collaborators" class="w-full h-full">
           <template #tab>
             <div class="tab-title">
@@ -185,7 +185,7 @@ onBeforeUnmount(() => {
 
           <WorkspaceCollaboratorsList :workspace-id="currentWorkspace.id" />
         </a-tab-pane>
-      </template>
+      </template> -->
       <template v-if="isEeUI && !props.workspaceId && isPaymentEnabled && isUIAllowed('workspaceBilling')">
         <a-tab-pane key="billing" class="w-full">
           <template #tab>
